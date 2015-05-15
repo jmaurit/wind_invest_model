@@ -1,0 +1,58 @@
+Use of weibull - extreme values - fat tails compared to 
+
+Issue bi-modal distribution of power:
+- depends on the choice of wind turbine 
+- some may have different power curves
+- uncertainty - choose between different wind power based on wind choices
+- some may be better at steady, low wind speeds
+- some operate better with gusty conditions
+
+Issue of correlation between wind production and power prices
+- areas of gusty wind conditions - are these likely to be periods with lots of wind power and lower prices. 
+- prior about how future wind prices will be
+
+P = 1/2*rho*A*v^3
+
+A- rotor swept area pi*r^2
+rho + air density
+
+Vestas V90 - 3.0 MW
+http://www.vestas.com/en/products_and_services/turbines/v90-3_0_mw#!technical-specifications
+
+The V90-3.0 MW® IEC IA/IIA is a great choice for high- and medium-wind sites with high turbulence. It is designed for easy transportation and installation while reducing foundation costs thanks to its lower load.
+
+
+OPERATIONAL DATA	
+Rated power
+3,000 kW
+Cut-in wind speed
+3.5 m/s
+Rated wind speed
+15 m/s
+Cut-out wind speed	25 m/s
+Re cut-in wind speed	20 m/s
+Wind class
+IEC IA/IIA
+Operating temperature range standard turbine	-20˚C to 40˚C
+Operating temperature range low temperature turbine
+-30˚C to 40˚C
+SOUND POWER
+(Mode 0, 10 m above ground, hub height 80 m, air density 1,225 kg/m³) 
+4 m/s 97.9 dB (A) 
+5 m/s 100.9 dB (A) 
+6 m/s 104.2 dB (A) 
+7 m/s 106.1 dB (A) 
+8 m/s 107.0 dB (A) 
+9 m/s 106.9 dB (A)
+ROTOR	
+Rotor diameter
+90 m
+Swept area
+6,362 m2
+Nominal revolutions	16.1 rpm
+Operational interval	 8.6 - 18.4 rpm
+Air brake full blade feathering with 3 pitch cylinders
+
+
+
+

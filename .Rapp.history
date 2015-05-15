@@ -1,0 +1,11 @@
+load("/Users/johannesmauritzen/research/wind_invest_model/wind.RData")
+dir
+vars
+dir
+wind
+head(wind)
+ls()
+head(wind.data)@
+fdskjal
+head(wind.data)
+write.csv(wind.data, "/Users/johannesmauritzen/research/wind_invest_model/wind_data.csv")

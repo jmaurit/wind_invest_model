@@ -1,0 +1,824 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"b",
+				"b"
+			],
+			[
+				"HDD_",
+				"HDD_malmo"
+			],
+			[
+				"hyp2_res2_",
+				"hyp2_res2_notCong"
+			],
+			[
+				"HDD",
+				"HDD_sundsvall"
+			],
+			[
+				"post_reform",
+				"post_reform1_plot"
+			],
+			[
+				"production",
+				"production"
+			],
+			[
+				"HDD_Stockholm",
+				"HDD_Stockholm_pdiff"
+			],
+			[
+				"predicted_",
+				"predicted_prod_plus1"
+			],
+			[
+				"time",
+				"timedelta"
+			],
+			[
+				"drop",
+				"drop_duplicates"
+			],
+			[
+				"to_",
+				"to_datetime"
+			],
+			[
+				"ski",
+				"skipinitialspace"
+			],
+			[
+				"font-",
+				"font-weight"
+			],
+			[
+				"SED",
+				"SEDataZ"
+			],
+			[
+				"SEprice",
+				"SEPrice_work_tplus1"
+			],
+			[
+				"oil",
+				"oil_price_real_l6"
+			],
+			[
+				"perc",
+				"perc_75_price"
+			],
+			[
+				"perc_",
+				"perc_25_price"
+			],
+			[
+				"av",
+				"avg_price"
+			],
+			[
+				"var_",
+				"var_quantity"
+			],
+			[
+				"mean",
+				"mean_quantity"
+			],
+			[
+				"series",
+				"series_lag"
+			],
+			[
+				"field",
+				"field_inspection"
+			],
+			[
+				"gam_price_over_",
+				"gam_price_over_2d_s_price"
+			],
+			[
+				"summar",
+				"summary_over_gamma"
+			],
+			[
+				"summary",
+				"summary_comp_under"
+			],
+			[
+				"smooth",
+				"smooth_price_2"
+			],
+			[
+				"statfjord",
+				"statfjord_plot"
+			],
+			[
+				"size",
+				"size_vs_init_prod"
+			],
+			[
+				"reco",
+				"recoverable_oil"
+			],
+			[
+				"invest_per_prd",
+				"invest_per_prod_l5"
+			],
+			[
+				"real",
+				"oil_price_real"
+			],
+			[
+				"fields",
+				"fields_p"
+			],
+			[
+				"peak",
+				"peak_to_end"
+			],
+			[
+				"res",
+				"res_fit_se"
+			],
+			[
+				"smooth_ben",
+				"smooth_bench_split"
+			],
+			[
+				"year",
+				"year_prod"
+			],
+			[
+				"min",
+				"min_time_to_peak"
+			],
+			[
+				"invest",
+				"investmentMillNOK_real"
+			],
+			[
+				"fitted",
+				"fitted_year_prod"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "wind_investment.tex",
+			"settings":
+			{
+				"buffer_size": 2989,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "WindAnalysis.R",
+			"settings":
+			{
+				"buffer_size": 2368,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Use of weibull - extreme values - fat tails compared to \n\nIssue of forming the prior:\n-prior based on previous knowledge - are the wind resources good in this area\n-Based on general wind map - from met office for example. \n\nIssue bi-modal distribution of power:\n- depends on the choice of wind turbine \n- some may have different power curves\n- uncertainty - choose between different wind power based on wind choices\n- some may be better at steady, low wind speeds\n- some operate better with gusty conditions\n\nIssue of correlation between wind production and power prices\n- areas of gusty wind conditions - are these likely to be periods with lots of wind power and lower prices. \n- prior about how future wind prices will be\n\nP = 1/2*rho*A*v^3\n\nA- rotor swept area pi*r^2\nrho + air density\n\nVestas V90 - 3.0 MW\nhttp://www.vestas.com/en/products_and_services/turbines/v90-3_0_mw#!technical-specifications\n\nThe V90-3.0 MW® IEC IA/IIA is a great choice for high- and medium-wind sites with high turbulence. It is designed for easy transportation and installation while reducing foundation costs thanks to its lower load.\n\n\nOPERATIONAL DATA	\nRated power\n3,000 kW\nCut-in wind speed\n3.5 m/s\nRated wind speed\n15 m/s\nCut-out wind speed	25 m/s\nRe cut-in wind speed	20 m/s\nWind class\nIEC IA/IIA\nOperating temperature range standard turbine	-20˚C to 40˚C\nOperating temperature range low temperature turbine\n-30˚C to 40˚C\nSOUND POWER\n(Mode 0, 10 m above ground, hub height 80 m, air density 1,225 kg/m³) \n4 m/s 97.9 dB (A) \n5 m/s 100.9 dB (A) \n6 m/s 104.2 dB (A) \n7 m/s 106.1 dB (A) \n8 m/s 107.0 dB (A) \n9 m/s 106.9 dB (A)\nROTOR	\nRotor diameter\n90 m\nSwept area\n6,362 m2\nNominal revolutions	16.1 rpm\nOperational interval	 8.6 - 18.4 rpm\nAir brake full blade feathering with 3 pitch cylinders\n\n\n\nV100-2.0 MW™ at a Glance\nThe V100-2.0 MW™ IEC IIB turbine allows you to increase productivity by opening up low- and medium-wind sites which were previously regarded as non-viable. To maximise power output at such locations, the turbines' 100 m rotor gains more from the available wind – starting at an incredibly low 3 m/s. Thanks to the 49 m blades, the turbines deliver a notable rotor-to-generator ratio producing a remarkable capacity and yield at low- and medium-wind sites.\n\nOPERATIONAL DATA	\nRated power\n2,000 kW (50/60 Hz)\nCut-in wind speed\n3 m/s\nRated wind speed\n12 m/s\nCut-out wind speed	22 m/s\nWind class\nIEC IIB \nOperating temperature range standard turbine	-20˚C to 40˚C\nOperating temperature range low temperature turbine\n-30˚C to 40˚C\n\n",
+			"file": "wind_investment_notes.txt",
+			"file_size": 1623,
+			"file_write_time": 1430909458000000,
+			"settings":
+			{
+				"buffer_size": 2534,
+				"line_ending": "Unix",
+				"name": "wind_investment_notes.txt"
+			}
+		},
+		{
+			"file": "power_curve.py",
+			"settings":
+			{
+				"buffer_size": 3436,
+				"line_ending": "Unix",
+				"name": "power_curve.py"
+			}
+		},
+		{
+			"file": "wind_turbine.py",
+			"settings":
+			{
+				"buffer_size": 1699,
+				"line_ending": "Unix",
+				"name": "wind_turbine.py"
+			}
+		},
+		{
+			"file": "prior_generation.py",
+			"settings":
+			{
+				"buffer_size": 945,
+				"line_ending": "Unix",
+				"name": "prior_generation.py"
+			}
+		},
+		{
+			"file": "simple_invest_model.py",
+			"settings":
+			{
+				"buffer_size": 1735,
+				"line_ending": "Unix",
+				"name": "simple_invest_model.py"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Preferences: Browse Packages"
+			],
+			[
+				"p",
+				"Preferences: Browse Packages"
+			],
+			[
+				"cp",
+				"Package Control: Disable Package"
+			],
+			[
+				"latex",
+				"LaTeXTools: View PDF"
+			],
+			[
+				"packag",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Package Control: Discover Packages"
+			],
+			[
+				"ife",
+				"Snippet: Ifelse"
+			],
+			[
+				"snippet ife",
+				"Snippet: Ifelse"
+			],
+			[
+				"snippetife",
+				"Snippet: Ifelse"
+			],
+			[
+				"snippet",
+				"Snippet: Length"
+			],
+			[
+				"sn",
+				"Snippet: For Loop"
+			],
+			[
+				"package Control: Install",
+				"Package Control: Install Package"
+			],
+			[
+				"package Control: List ",
+				"Package Control: List Packages"
+			],
+			[
+				"PACKAGE CONTROL: INSTALL",
+				"Package Control: Install Package"
+			],
+			[
+				"Package",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/johannesmauritzen/Google Drive/Python/econ_quant/kalman.py",
+		"/Users/johannesmauritzen/Google Drive/Python/econ_quant/kalman_problems.py",
+		"/Users/johannesmauritzen/Google Drive/Python/econ_quant/kalman_examples.py",
+		"/Users/johannesmauritzen/Dropbox/market_power/IJIO/rr_analysis.py",
+		"/Users/johannesmauritzen/Dropbox/market_power/IJIO/rr_dataClean.py",
+		"/Users/johannesmauritzen/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/johannesmauritzen/Dropbox/market_power/IJIO/rr_regressions.py",
+		"/Users/johannesmauritzen/Dropbox/market_power/IJIO/rr_notes.txt",
+		"/Users/johannesmauritzen/Dropbox/market_power/empirical_part.tex",
+		"/Users/johannesmauritzen/Google Drive/marketPower/paper_code.r",
+		"/Users/johannesmauritzen/Google Drive/marketPower/MarketPowerAugust2013.R",
+		"/Users/johannesmauritzen/Dropbox/market_power/market_power_combined.tex",
+		"/Users/johannesmauritzen/Google Drive/marketPower/Realtime_vs_dayahead_oktober2013.tex",
+		"/Users/johannesmauritzen/Google Drive/marketPower/Realtime_vs_Dayahead_hydro_market_power_111122.tex",
+		"/Users/johannesmauritzen/Google Drive/marketPower/Analysis_nov_2013.r",
+		"/Users/johannesmauritzen/Google Drive/marketPower/empirical_part.tex",
+		"/Users/johannesmauritzen/Google Drive/marketPower/Realtime_vs_DayaheadAugust.tex",
+		"/Users/johannesmauritzen/Google Drive/marketPower/Analysis_may_2013.R",
+		"/Users/johannesmauritzen/Google Drive/marketPower/leftover.r",
+		"/Users/johannesmauritzen/Google Drive/github/rOil/presentations/oil_prices.tex",
+		"/Users/johannesmauritzen/Google Drive/price-spikes/r-price-spikes/AnalysisMay2013.R",
+		"/Users/johannesmauritzen/Google Drive/price-spikes/AnalysisMay2013.R",
+		"/Users/johannesmauritzen/Google Drive/price-spikes/priceSpikeAnalysis.R",
+		"/Users/johannesmauritzen/Google Drive/elbas_efficiency/elbas_ACD.r",
+		"/Users/johannesmauritzen/Google Drive/marketPower/marketPowerSeptember2013.r",
+		"/Users/johannesmauritzen/Google Drive/github/rOil/presentations/oil_pres_ifn.tex",
+		"/Users/johannesmauritzen/Google Drive/github/rOil/presentations/oil_pres1.tex",
+		"/Users/johannesmauritzen/Google Drive/github/rOil/presentations/oil_pres_ifn.txt",
+		"/Users/johannesmauritzen/Desktop/website_copy/jmaurit.github.io/index.html",
+		"/Users/johannesmauritzen/Google Drive/github/rOil/presentation/oil_pres1.tex",
+		"/Users/johannesmauritzen/Google Drive/github/rOil/oil.R",
+		"/Users/johannesmauritzen/Google Drive/github/rOil/Oil_spatial.R",
+		"/Users/johannesmauritzen/Google Drive/github/rOil/presentations/brownbag.txt",
+		"/Users/johannesmauritzen/Google Drive/github/rOil/oil_pres1.tex",
+		"/Users/johannesmauritzen/Desktop/extract.r",
+		"/Users/johannesmauritzen/Google Drive/marketPower/cleaning.R",
+		"/Users/johannesmauritzen/Google Drive/github/state_space/statespace.r",
+		"/Users/johannesmauritzen/Google Drive/github/elec_wavelet/wavelet.r",
+		"/Users/johannesmauritzen/Google Drive/github/rOil/oil_clean.R",
+		"/Users/johannesmauritzen/Google Drive/github/rOil/reserve_forecasts.r",
+		"/Users/johannesmauritzen/Google Drive/github/rOil/oil_modeling.R",
+		"/Users/johannesmauritzen/Google Drive/github/rOil/oil_modeling_prep.r",
+		"/Users/johannesmauritzen/Google Drive/github/rOil/oil_bootstrap.r",
+		"/Users/johannesmauritzen/Google Drive/github/rOil/oil_forecasting.r",
+		"/Users/johannesmauritzen/Google Drive/Oil/rOil/oil.R",
+		"/Users/johannesmauritzen/Google Drive/Oil/rOil/oil_modeling_prep",
+		"/Users/johannesmauritzen/Google Drive/Oil/rOil/#oil_modeling_prep.r",
+		"/Users/johannesmauritzen/Google Drive/website/jmaurit.github.io/index.html",
+		"/Users/johannesmauritzen/Google Drive/Oil/rOil/oil_clean.R",
+		"/Users/johannesmauritzen/Google Drive/Oil/rOil/oil_modeling.R",
+		"/Users/johannesmauritzen/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"wind.data",
+			"exer2_1",
+			"self.",
+			"np",
+			"h2012",
+			"h2011",
+			"_1",
+			".csv",
+			"area",
+			"predicted_prod",
+			"HDD_malmo",
+			"HDD_Stockholm",
+			"HDD_sundsvall",
+			"HDD_lulea",
+			"HDD_avg",
+			"model_sim1",
+			"HDD_avg",
+			"+ ",
+			"size=10",
+			"sim",
+			"SE2",
+			"HDD_malmo",
+			"HDD_Stockholm",
+			"HDD_sundsvall",
+			"HDD_lulea",
+			"HDD_avg",
+			"png",
+			"SE_results",
+			"full_results",
+			"[",
+			"]",
+			"]]",
+			"[[",
+			"elbas_less_spot",
+			"mdiff",
+			"hyp1",
+			"production",
+			"predicted_prod_long",
+			"hyp1_data",
+			"Stockholm",
+			"hyp1",
+			"Stockholm",
+			"hyp1",
+			"sell_series2",
+			"hyp_data1",
+			"hyp_data2",
+			"sell_series2",
+			"sell_series21",
+			"sell_series",
+			"sell_series1",
+			"sell_series",
+			"how=\"left\"",
+			"how=\"right\"",
+			"sell_series",
+			"Stockholm",
+			"malmo",
+			"Stockholm",
+			"consumption",
+			"production",
+			"predicted_cons",
+			"prod",
+			"production",
+			"consumption",
+			";",
+			"SEdata",
+			"elbas_less_spot",
+			"hyp1",
+			"failure_hydro",
+			"failure_other",
+			"failure_oil",
+			"nuclear",
+			"vinterdekk",
+			">vinterdekk\n",
+			">\n",
+			"/Users/johannesmauritzen/Google Drive/oil/figures/",
+			"fields_p"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"wind_data",
+			"mod",
+			"",
+			"h2013",
+			"h2012",
+			"_2",
+			".xls",
+			"predicted_cons",
+			"consumption",
+			"model_sim_alt1",
+			"HDD_avg_mlag",
+			"size=7",
+			"sim_c",
+			"SE3",
+			"predicted_cons",
+			"SE_N_results",
+			"SE_S_results",
+			"SE_results",
+			"[[",
+			"]]",
+			"]",
+			"[",
+			"hyp2_series",
+			"pdiff",
+			"hyp2",
+			"predicted_prod",
+			"production_long",
+			"hyp2_data",
+			"lulea",
+			"sundsvall",
+			"malmo",
+			"hyp2",
+			"sundsvall",
+			"lulea",
+			"malmo",
+			"hyp2",
+			"hyp2_data",
+			"operating_data",
+			"hyp2_series",
+			"hyp_data2",
+			"hyp2_data",
+			"hyp_data1",
+			"hyp_data2",
+			"sell_series1",
+			"sell_series2",
+			"sell_series",
+			"sell_series1",
+			"how=\"outer\"",
+			"hyp2_data",
+			"sundsvall",
+			"lulea",
+			"malmo",
+			"sundsvall",
+			"lulea",
+			"malmo",
+			"net_exchange",
+			"predicted_cons",
+			"predicted_prod",
+			"net_exchange",
+			"cons",
+			"predicted_prod",
+			"production",
+			"\",\"",
+			"SEData",
+			"hyp2series",
+			"hyp2",
+			"failure_gas",
+			"failure_hydro",
+			"failure",
+			"failure_other",
+			"failure_wind",
+			"failure_nuclear",
+			"failure_coal",
+			"inverted_failure",
+			"umm_inverted_failure <- melt(umm[c(1,98:121)], id.vars=\"date\")\numm_nuclear$variable<-do.call(\"rbind\", strsplit(as.character(umm_nuclear$variable), \"_\"))[,3]\nnames(umm_nuclear)[2:3]<-c(\"hour\", \"nuclear\")",
+			"varmeovn",
+			"/Users/johannesmauritzen/Google Drive/github/rOil/presentations/",
+			"fields_eko"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "wind_investment.tex",
+					"settings":
+					{
+						"buffer_size": 2989,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeXing/support/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "WindAnalysis.R",
+					"settings":
+					{
+						"buffer_size": 2368,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1251,
+								1251
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/R/R.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "wind_investment_notes.txt",
+					"settings":
+					{
+						"buffer_size": 2534,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								222,
+								222
+							]
+						],
+						"settings":
+						{
+							"auto_name": "wind_investment_notes.txt",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "power_curve.py",
+					"settings":
+					{
+						"buffer_size": 3436,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								325,
+								2023
+							]
+						],
+						"settings":
+						{
+							"auto_name": "power_curve.py",
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1888.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "wind_turbine.py",
+					"settings":
+					{
+						"buffer_size": 1699,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "wind_turbine.py",
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "prior_generation.py",
+					"settings":
+					{
+						"buffer_size": 945,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								904,
+								904
+							]
+						],
+						"settings":
+						{
+							"auto_name": "prior_generation.py",
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 201.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "simple_invest_model.py",
+					"settings":
+					{
+						"buffer_size": 1735,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1733,
+								1733
+							]
+						],
+						"settings":
+						{
+							"auto_name": "simple_invest_model.py",
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1559.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 210.0
+	},
+	"output.latex_log":
+	{
+		"height": 178.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 109.0,
+	"status_bar_visible": true
+}

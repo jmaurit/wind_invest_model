@@ -1,0 +1,67 @@
+\documentclass[11pt]{article}
+
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+% \usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{natbib} %for citet and citep
+\usepackage{syntonly}
+\usepackage{esdiff} %for writing partial derivatives
+\usepackage{url} %for inserting urls
+\usepackage{placeins}
+\usepackage{textcomp} % for tildas
+% \syntaxonly for quickly checking document
+%set document settings
+
+ \doublespacing % from package setspacs
+
+% table font size
+\let\oldtabular\tabular
+\renewcommand{\tabular}{\scriptsize\oldtabular}
+
+\title{A Bayesian wind farm investment model with an option of waiting}
+
+%\author{Johannes Mauritzen\\
+% 		Department of Business and Management Science\\
+%   NHH Norwegian School of Economics\\
+%   Bergen, Norway\\
+%   johannes.mauritzen@nhh.no\\
+%   \url{jmaurit.github.io}\\
+% 		}
+\date{\today}
+
+
+\begin{document}
+ \begin{spacing}{1} %sets spacing to single for title page
+	\maketitle
+
+\begin{abstract}
+ 
+\end{abstract}
+
+% \thanks{*I would like to thank Sturla Kvamsdal, Anastasia Shcherbakova, Endre Tvinnereim, Peter Berck, Henrik Horn, and Thomas Tanger\aa s for helpful comments and discussion.}
+%JEL Codes: Q4, L71
+ \end{spacing}
+
+\section{Introduction}
+Unlike traditional energy generation technologies, the efficiency and profitability of wind farms are highly dependent on location. Even modest differences in long-term average wind speeds can have major consequences on the profitability of wind farms over time. However, the inherent appropriateness of a given location is subject to high degree of uncertainty as wind speeds can vary substantially from month-to-month, and even year-to-year. 
+
+In this article we introduce a Bayesian decision model of wind farm investment that allows for an option of waiting. A Bayesian approach allows us build an investment model that can be extended to include all relevant forms of uncertainty, and allows this uncertainty to be flexibly updated over time as new information is acquired.
+
+Outline:
+-We first introduce a simple two period toy model with linear loss function, where the location parameter is the only source of uncertainty. This simple model can be solved analytically, generating some stylized results that provide intuition and a frameworks for interpreting more complicated models. We use wind-speed date from... to illustrate the use of the model. 
+
+-We then introduce a more realistic investment model that takes into account both uncertainty of the location parameter as well as electricity price. We introduce realistic loss functions that reflect the real-life non-linear relationship between wind-speeds and power generation from wind farms. We also allow for covariation between output electricity prices and wind farm production. 
+
+-We use Hamiltonian Markov-Chain Monte Carlo to simulate sampling from the posterior. 
+
+-We suggest other ways that the model could be extended. 
+
+Main results:
+
+\section{Simple analytic model}
+
+\
+
+\end{document}
