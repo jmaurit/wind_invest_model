@@ -5,6 +5,8 @@ from scipy.optimize import fmin
 from scipy.stats import weibull_min
 from scipy.stats import exponweib
 import math
+import matplotlib.pyplot as plt
+import numpy as np
 
 import os
 os.chdir("/Users/johannesmauritzen/research/wind_invest_model/")
@@ -55,7 +57,7 @@ x_wind=np.linspace(0,50,200)
 prior_dist=[weib(x, k_hat, lmbd_hat*np.sqrt(3/2)) for x in x_wind]
 
 fig, ax = plt.subplots()
-	ax.plot(x_wind, prior_dist)
+ax.plot(x_wind, prior_dist)
 plt.show()
 
 #now sample from distribution,
@@ -63,8 +65,8 @@ plt.show()
 prior_winds=weibull_min.rvs(c=k_hat, scale=(lmbd_hat*np.sqrt(3/2)), size=8760)
 
 fig, ax = plt.subplots()
-	ax.plot(x_wind, prior_dist)
-	ax.hist(prior_winds, normed=1, bins=100)
+ax.plot(x_wind, prior_dist)
+ax.hist(prior_winds, normed=1, bins=100)
 plt.show()
 
 #convert prior_winds to power output
