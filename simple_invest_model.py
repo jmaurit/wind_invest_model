@@ -8,6 +8,8 @@ import seaborn as sb
 import numpy as np
 from numpy import random as rd
 from scipy.stats import exponweib
+from scipy.stats import weibull_min
+import random
 
 import os
 os.chdir("/Users/johannesmauritzen/research/wind_invest_model/")
@@ -65,9 +67,10 @@ v90_turbine = wind_turbine(curve_speeds=wind_speed, power_points = power_kw_v90)
 power_output = np.sum(v90_turbine(wind_sample))
 
 yearly_power_output = []
-for i in range(300):
+for i in range(500):
 	wind_sample=andmyran_prior.sample_from_prior()
-	yearly_power_output.append(np.sum(v90_turbine(wind_sample)))
+	power = v90_turbine(wind_sample)
+	yearly_power_output.append(np.sum(power))
 
 plt.hist(np.array(yearly_power_output)*.02, bins=30, normed=1)
 plt.show()
@@ -84,17 +87,16 @@ def loss_pass(kwh,I, c_oper,p_kwh,d):
 
 def loss_wait(kwh, I, c_oper, p_kwh, d, M):
 	stage2_loss=0
-	if loss_invest(kwh, I, c_oper,p_kwh) < loss_pass(kwh, I, c_oper,p_kwh, d):
+	if loss_invest(kwh, I, c_oper,p_kwh) < loss_pass(kwh, I, c_oper,p_kwh, d)  and loss_invest(kwh, I, c_oper,p_kwh)<0:
 		stage2_loss = loss_invest(kwh, I, c_oper,p_kwh)
 	else:
 		stage2_loss =  loss_pass(kwh, I, c_oper,p_kwh, d)
-
 	return(stage2_loss + M)
 
 #fixed parameters
-I = 150000 # fixed investment cost
+I = 100000 # fixed investment cost
 c_oper = .005 #operating cost of turbine
-M = 5000 #fixed cost of measurement
+M = 0 #fixed cost of measurement/value of waiting
 p_kwh = .03 #price per kwh
 d = .90 #discount factor for opportunity cost
 
@@ -117,7 +119,13 @@ ax3.hist(dist_loss_wait, bins=50)
 plt.show()
 
 exp_loss_invest = np.sum(dist_loss_invest)/len(dist_loss_invest)
+exp_loss_pass = np.sum(dist_loss_pass)/len(dist_loss_pass)
+exp_loss_wait = np.sum(dist_loss_wait)/len(dist_loss_wait)
 
+print(exp_loss_invest, exp_loss_pass, exp_loss_wait)
+
+value_of_waiting = exp_loss_pass-exp_loss_wait
+print("value of waiting", value_of_waiting)
 
 lmbd_hat = andmyran_prior.lmbd_hat
 k_hat =andmyran_prior.k_hat
@@ -126,20 +134,21 @@ k_hat =andmyran_prior.k_hat
 wind_invest_code = """
 data {
 	int<lower=0> N; //number of observations
-	real alpha_hat; //prior level of alpha
-	real sigma_hat; //prior level of sigma
+	real alpha_hat; //prior mean of alpha
+	real sigma_hat; //prior mean of sigma
 	vector[N] w; //wind speed observations
 
 }
 parameters {
-	real<lower=0> alpha ~ normal(alpha_hat, 1); 
-	real<lower=0> sigma ~ normal(sigma_hat, 1); 
+	real<lower=0> alpha; 
+	real<lower=0> sigma; 
 }
 model {
+	alpha ~ normal(alpha_hat,1); //prior on alpha
+	sigma ~ normal(sigma_hat, 1); //prior on sigma
 	w ~ weibull(alpha, sigma); //likelihood
 }
 """
-
 
 
 #Step one - prior distribution from wind speed data from metreological office
@@ -161,18 +170,24 @@ wind_invest_data = {'N': N ,
 fit = pystan.stan(model_code=wind_invest_code, data=wind_invest_data,
                   iter=10000, chains=4)
 
+fit_priors = pystan.stan(model_code=wind_invest_code, data=wind_invest_data,
+                  iter=10000, chains=4)
+
 # fit2 = pystan.stan(fit=fit, data=wind_invest_data, iter=10000, chains=4)
 # print(fit)
 
 fit.plot()
 plt.show()
 
-la=fit.extract(permuted=True)
-alpha_hat = la['alpha'].copy()
-sigma_hat = la['sigma'].copy()
-log_posterior = la['lp__'].copy()
+fit_priors.plot()
+plt.show()
 
-plt.hist(alpha_hat, bins=100)
+la=fit.extract(permuted=True)
+alpha_post_dist = la['alpha'].copy()
+sigma_post_dist = la['sigma'].copy()
+#log_posterior = la['lp__'].copy()
+
+plt.hist(alpha_dist, bins=100)
 plt.show()
 
 means=[sigma_hat[i]*math.gamma(1+1/alpha_hat[i]) for i in range(len(sigma_hat))]
@@ -183,19 +198,44 @@ ax2.hist(sigma_hat, bins=100)
 ax3.hist(means, bins=100)
 plt.show()
 
-rd.weibull()
-
 def weib(x,s,a):
      return (a / s) * (x / s)**(a - 1) * np.exp(-(x / s)**a)
 
 x_wind=np.linspace(0,50,200)
 
 fig, ax = plt.subplots()
-for i in range(200):
-	wind_dist=[weib(x, sigma_hat[i], alpha_hat[i]) for x in x_wind]
+for i in range(1000):
+	wind_dist=[weib(x, sigma_post_dist[i], alpha_post_dist[i]) for x in x_wind]
 	ax.plot(x_wind, wind_dist, alpha=.1)
-ax.hist(w,normed=1, bins=50)
+ax.hist(w, normed=1, bins=50)
 plt.show()
 
+post_yearly_power=[]
+#generate
+for i in range(100):
+	sigma_post_sample = random.sample(list(sigma_post_dist), 8760)
+	alpha_post_sample = random.sample(list(alpha_post_dist), 8760)
+	posterior_wind_data = [float(weibull_min.rvs(c=alpha_post_sample[i], 
+	scale=sigma_post_sample[i], size=1)) for i in range(len(alpha_post_sample))]
+	post_power_dist = v90_turbine(posterior_wind_data)
+	post_yearly_power.append(np.sum(post_power_dist))
+
+post_kwh_dist = post_yearly_power
+
+post_dist_invest=[]
+post_dist_pass=[]
+
+for kwh in post_kwh_dist:
+	post_dist_invest.append(loss_invest(kwh, I, c_oper, p_kwh))
+	post_dist_pass.append(loss_pass(kwh, I , c_oper, p_kwh, d))
+
+fig, (ax1, ax2) =plt.subplots(2)
+ax1.hist(post_dist_invest, normed=1)
+ax1.set_title("Losses, Invest")
+ax1.set_xlim([-120000,110000])
+ax2.hist(post_dist_pass, normed=1)
+ax2.set_title("Losses, Pass")
+ax2.set_xlim([-120000,110000])
+plt.show()
 
 

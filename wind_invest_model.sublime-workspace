@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"alpha",
+				"alpha"
+			],
+			[
 				"ax",
 				"ax"
 			],
@@ -212,9 +216,18 @@
 			"file": "wind_turbine.py",
 			"settings":
 			{
-				"buffer_size": 1716,
+				"buffer_size": 1733,
 				"line_ending": "Unix",
 				"name": "wind_turbine.py"
+			}
+		},
+		{
+			"file": "simple_invest_model.py",
+			"settings":
+			{
+				"buffer_size": 6829,
+				"line_ending": "Unix",
+				"name": "simple_invest_model.py"
 			}
 		},
 		{
@@ -224,15 +237,6 @@
 				"buffer_size": 1798,
 				"line_ending": "Unix",
 				"name": "prior_generation.py"
-			}
-		},
-		{
-			"file": "simple_invest_model.py",
-			"settings":
-			{
-				"buffer_size": 5000,
-				"line_ending": "Unix",
-				"name": "simple_invest_model.py"
 			}
 		}
 	],
@@ -669,7 +673,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 285.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -679,15 +683,15 @@
 					"file": "wind_turbine.py",
 					"settings":
 					{
-						"buffer_size": 1716,
+						"buffer_size": 1733,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								212,
-								212
+								1,
+								1733
 							]
 						],
 						"settings":
@@ -697,13 +701,41 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 422.0,
+						"translation.y": 831.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 5,
+					"file": "simple_invest_model.py",
+					"settings":
+					{
+						"buffer_size": 6829,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2125,
+								2173
+							]
+						],
+						"settings":
+						{
+							"auto_name": "simple_invest_model.py",
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1832.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
 					"file": "wind_prior_generation.py",
 					"settings":
 					{
@@ -714,8 +746,8 @@
 						"selection":
 						[
 							[
-								704,
-								704
+								0,
+								1798
 							]
 						],
 						"settings":
@@ -725,35 +757,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 526.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "simple_invest_model.py",
-					"settings":
-					{
-						"buffer_size": 5000,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3236,
-								3236
-							]
-						],
-						"settings":
-						{
-							"auto_name": "simple_invest_model.py",
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3130.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

@@ -22,7 +22,7 @@ class wind_turbine(object):
 		self.cut_out = cut_out
 
 		#initialize power function
-		self.power_function
+		self.power_function = power_function
 		self.power_f=interp1d(self.curve_speeds, self.power_points, kind="cubic")
 	def __repr__(self):
 		return self.__str__()
