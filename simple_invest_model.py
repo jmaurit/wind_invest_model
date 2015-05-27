@@ -1,6 +1,7 @@
 #simple_invest_model.py
 
 import pystan
+import pickle # for saving Stan fitted object
 import math
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -29,6 +30,8 @@ from wind_prior_generation import wind_prior_generation
 index =  ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug',
  'sep', 'oct', 'nov', 'dec']
 
+month = [i+1 for i in range(12)]
+
 andenes_maws = [6.6, 7.9, 8.6, 7.8, 7.1, 5.7, 5.8, 5.8, 5.0, 3.9,5.9, 5.6]
 andenes_smws = [19.1, 23.0, 24.8, 17.2, 20.0, 24.5, 14.9, 17.2, 14.3, 13.5, 14.6, 16.5]
 
@@ -43,10 +46,25 @@ harstad_smws = [10.6, 10.4, 14.0, 11.0, 15.5, 9.7, 7.0, 9.9, 7.4, 6.7, 9.8, 8.7]
 sortland_maws = [3.3, 4.8, 4.7, 3.5, 3.3, 3.3, 3.2, 3.4, 3.8, 3.9, 5.1, 4.0]
 sortland_smws = [11.8, 13.3, 22.5, 13.3, 12.3, 21.5, 11.8, 12.3, 9.7, 8.7, 15.9, 13.3]
 
-avg_wind_speed_data = pd.DataFrame({'andenes':andenes_maws, 
+avg_wind_speed_data = pd.DataFrame({'month':month, 'andenes':andenes_maws, 
 	'harstad':harstad_maws, 'sortland':sortland_maws})
 
+# fig, ax = plt.subplots()
+# ax.plot(avg_wind_speed_data.month, avg_wind_speed_data.andenes, "b-")
+# ax.text(6,7, "Andenes")
+# ax.plot(avg_wind_speed_data.month, avg_wind_speed_data.harstad, "r-")
+# ax.text(2,5, "Harstad")
+# ax.plot(avg_wind_speed_data.month, avg_wind_speed_data.sortland, "g-")
+# ax.text(6,2, "Sortland")
+# ax.set_ylabel("Avg. Monthly Wind Speed")
+# ax.set_xlabel("Month")
+# ax.set_xlim(0,13)
+# fig.set_size_inches(10,6)
+# #fig.savefig("figures/avg_wind_speed_data.png")
+# plt.show()
+
 andmyran_prior = wind_prior_generation(avg_wind_speed_data)
+
 
 wind, prior = andmyran_prior.create_wind_prior()
 wind_sample = andmyran_prior.sample_from_prior()
@@ -64,6 +82,7 @@ power_kw_v90=np.array([85, 200, 350, 590, 900, 1300, 1720, 2150, 2560, 2840, 298
 
 #Create instance of a wind turbine
 v90_turbine = wind_turbine(curve_speeds=wind_speed, power_points = power_kw_v90)
+
 power_output = np.sum(v90_turbine(wind_sample))
 
 yearly_power_output = []
@@ -167,22 +186,25 @@ wind_invest_data = {'N': N ,
 	'sigma_hat':sigma_hat
 }
 
-fit = pystan.stan(model_code=wind_invest_code, data=wind_invest_data,
-                  iter=10000, chains=4)
+wind_invest_model = pystan.StanModel(model_code=wind_invest_code)
+wind_invest_fit = wind_invest_model.sampling(data=wind_invest_data)
+#fit_priors = pystan.stan(model_code=wind_invest_code, data=wind_invest_data,
+ #                 iter=10000, chains=4)
 
-fit_priors = pystan.stan(model_code=wind_invest_code, data=wind_invest_data,
-                  iter=10000, chains=4)
+with open('wind_invest_model.pkl', 'wb') as f:
+    pickle.dump(wind_invest_model, f)
+
+# load it at some future point
+with open('wind_invest_model.pkl', 'rb') as f:
+    wind_invest_model = pickle.load(f)
 
 # fit2 = pystan.stan(fit=fit, data=wind_invest_data, iter=10000, chains=4)
 # print(fit)
 
-fit.plot()
+wind_invest_fit.plot()
 plt.show()
 
-fit_priors.plot()
-plt.show()
-
-la=fit.extract(permuted=True)
+la=wind_invest_fit.extract(permuted=True)
 alpha_post_dist = la['alpha'].copy()
 sigma_post_dist = la['sigma'].copy()
 #log_posterior = la['lp__'].copy()

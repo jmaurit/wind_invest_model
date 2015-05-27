@@ -1,5 +1,9 @@
 Use of weibull - extreme values - fat tails compared to 
 
+Issue of forming the prior:
+-prior based on previous knowledge - are the wind resources good in this area
+-Based on general wind map - from met office for example. 
+
 Issue bi-modal distribution of power:
 - depends on the choice of wind turbine 
 - some may have different power curves
@@ -55,4 +59,20 @@ Air brake full blade feathering with 3 pitch cylinders
 
 
 
+V100-2.0 MW™ at a Glance
+The V100-2.0 MW™ IEC IIB turbine allows you to increase productivity by opening up low- and medium-wind sites which were previously regarded as non-viable. To maximise power output at such locations, the turbines' 100 m rotor gains more from the available wind – starting at an incredibly low 3 m/s. Thanks to the 49 m blades, the turbines deliver a notable rotor-to-generator ratio producing a remarkable capacity and yield at low- and medium-wind sites.
+
+OPERATIONAL DATA	
+Rated power
+2,000 kW (50/60 Hz)
+Cut-in wind speed
+3 m/s
+Rated wind speed
+12 m/s
+Cut-out wind speed	22 m/s
+Wind class
+IEC IIB 
+Operating temperature range standard turbine	-20˚C to 40˚C
+Operating temperature range low temperature turbine
+-30˚C to 40˚C
 

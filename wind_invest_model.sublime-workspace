@@ -179,8 +179,17 @@
 			"file": "wind_investment.tex",
 			"settings":
 			{
-				"buffer_size": 2989,
+				"buffer_size": 4821,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "simple_invest_model.py",
+			"settings":
+			{
+				"buffer_size": 7652,
+				"line_ending": "Unix",
+				"name": "simple_invest_model.py"
 			}
 		},
 		{
@@ -192,10 +201,7 @@
 			}
 		},
 		{
-			"contents": "Use of weibull - extreme values - fat tails compared to \n\nIssue of forming the prior:\n-prior based on previous knowledge - are the wind resources good in this area\n-Based on general wind map - from met office for example. \n\nIssue bi-modal distribution of power:\n- depends on the choice of wind turbine \n- some may have different power curves\n- uncertainty - choose between different wind power based on wind choices\n- some may be better at steady, low wind speeds\n- some operate better with gusty conditions\n\nIssue of correlation between wind production and power prices\n- areas of gusty wind conditions - are these likely to be periods with lots of wind power and lower prices. \n- prior about how future wind prices will be\n\nP = 1/2*rho*A*v^3\n\nA- rotor swept area pi*r^2\nrho + air density\n\nVestas V90 - 3.0 MW\nhttp://www.vestas.com/en/products_and_services/turbines/v90-3_0_mw#!technical-specifications\n\nThe V90-3.0 MW® IEC IA/IIA is a great choice for high- and medium-wind sites with high turbulence. It is designed for easy transportation and installation while reducing foundation costs thanks to its lower load.\n\n\nOPERATIONAL DATA	\nRated power\n3,000 kW\nCut-in wind speed\n3.5 m/s\nRated wind speed\n15 m/s\nCut-out wind speed	25 m/s\nRe cut-in wind speed	20 m/s\nWind class\nIEC IA/IIA\nOperating temperature range standard turbine	-20˚C to 40˚C\nOperating temperature range low temperature turbine\n-30˚C to 40˚C\nSOUND POWER\n(Mode 0, 10 m above ground, hub height 80 m, air density 1,225 kg/m³) \n4 m/s 97.9 dB (A) \n5 m/s 100.9 dB (A) \n6 m/s 104.2 dB (A) \n7 m/s 106.1 dB (A) \n8 m/s 107.0 dB (A) \n9 m/s 106.9 dB (A)\nROTOR	\nRotor diameter\n90 m\nSwept area\n6,362 m2\nNominal revolutions	16.1 rpm\nOperational interval	 8.6 - 18.4 rpm\nAir brake full blade feathering with 3 pitch cylinders\n\n\n\nV100-2.0 MW™ at a Glance\nThe V100-2.0 MW™ IEC IIB turbine allows you to increase productivity by opening up low- and medium-wind sites which were previously regarded as non-viable. To maximise power output at such locations, the turbines' 100 m rotor gains more from the available wind – starting at an incredibly low 3 m/s. Thanks to the 49 m blades, the turbines deliver a notable rotor-to-generator ratio producing a remarkable capacity and yield at low- and medium-wind sites.\n\nOPERATIONAL DATA	\nRated power\n2,000 kW (50/60 Hz)\nCut-in wind speed\n3 m/s\nRated wind speed\n12 m/s\nCut-out wind speed	22 m/s\nWind class\nIEC IIB \nOperating temperature range standard turbine	-20˚C to 40˚C\nOperating temperature range low temperature turbine\n-30˚C to 40˚C\n\n",
 			"file": "wind_investment_notes.txt",
-			"file_size": 1623,
-			"file_write_time": 1430909458000000,
 			"settings":
 			{
 				"buffer_size": 2534,
@@ -216,18 +222,9 @@
 			"file": "wind_turbine.py",
 			"settings":
 			{
-				"buffer_size": 1733,
+				"buffer_size": 1722,
 				"line_ending": "Unix",
 				"name": "wind_turbine.py"
-			}
-		},
-		{
-			"file": "simple_invest_model.py",
-			"settings":
-			{
-				"buffer_size": 6829,
-				"line_ending": "Unix",
-				"name": "simple_invest_model.py"
 			}
 		},
 		{
@@ -568,7 +565,7 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -576,7 +573,7 @@
 					"file": "wind_investment.tex",
 					"settings":
 					{
-						"buffer_size": 2989,
+						"buffer_size": 4821,
 						"regions":
 						{
 						},
@@ -592,13 +589,41 @@
 							"syntax": "Packages/LaTeXing/support/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 325.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
+					"file": "simple_invest_model.py",
+					"settings":
+					{
+						"buffer_size": 7652,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2080,
+								2049
+							]
+						],
+						"settings":
+						{
+							"auto_name": "simple_invest_model.py",
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1499.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
 					"file": "WindAnalysis.R",
 					"settings":
 					{
@@ -609,8 +634,8 @@
 						"selection":
 						[
 							[
-								1251,
-								1251
+								387,
+								387
 							]
 						],
 						"settings":
@@ -624,7 +649,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 3,
 					"file": "wind_investment_notes.txt",
 					"settings":
 					{
@@ -651,7 +676,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "power_curve.py",
 					"settings":
 					{
@@ -679,19 +704,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "wind_turbine.py",
 					"settings":
 					{
-						"buffer_size": 1733,
+						"buffer_size": 1722,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1,
-								1733
+								1260,
+								1260
 							]
 						],
 						"settings":
@@ -701,35 +726,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 831.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "simple_invest_model.py",
-					"settings":
-					{
-						"buffer_size": 6829,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2125,
-								2173
-							]
-						],
-						"settings":
-						{
-							"auto_name": "simple_invest_model.py",
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1832.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -746,8 +743,8 @@
 						"selection":
 						[
 							[
-								0,
-								1798
+								1181,
+								1144
 							]
 						],
 						"settings":
@@ -757,7 +754,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1252.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
