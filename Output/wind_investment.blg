@@ -3,46 +3,49 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: wind_investment.aux
 The style file: plainnat.bst
 Database file #1: wind_investment.bib
+Warning--to sort, need author or key in vestas_v90
+Warning--empty year in vestas_v90
+Warning--empty publisher in stan_development_team_pystan:_2014
 Warning--empty publisher in stan_development_team_stan
-You've used 1 entry,
+You've used 4 entries,
             2773 wiz_defined-function locations,
-            596 strings with 4989 characters,
-and the built_in function-call counts, 340 in all, are:
-= -- 24
-> -- 10
-< -- 1
-+ -- 4
-- -- 3
-* -- 21
-:= -- 60
-add.period$ -- 4
-call.type$ -- 1
-change.case$ -- 3
-chr.to.int$ -- 1
-cite$ -- 3
-duplicate$ -- 20
-empty$ -- 33
-format.name$ -- 4
-if$ -- 64
-int.to.chr$ -- 1
+            607 strings with 5375 characters,
+and the built_in function-call counts, 1189 in all, are:
+= -- 97
+> -- 30
+< -- 3
++ -- 14
+- -- 9
+* -- 75
+:= -- 178
+add.period$ -- 13
+call.type$ -- 4
+change.case$ -- 13
+chr.to.int$ -- 3
+cite$ -- 13
+duplicate$ -- 74
+empty$ -- 130
+format.name$ -- 12
+if$ -- 248
+int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 2
-newline$ -- 14
-num.names$ -- 4
-pop$ -- 12
+missing$ -- 5
+newline$ -- 29
+num.names$ -- 12
+pop$ -- 47
 preamble$ -- 1
-purify$ -- 3
+purify$ -- 11
 quote$ -- 0
-skip$ -- 13
+skip$ -- 49
 stack$ -- 0
-substring$ -- 2
-swap$ -- 1
+substring$ -- 9
+swap$ -- 6
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 6
-warning$ -- 1
-while$ -- 3
+type$ -- 34
+warning$ -- 4
+while$ -- 9
 width$ -- 0
-write$ -- 20
-(There was 1 warning)
+write$ -- 54
+(There were 4 warnings)

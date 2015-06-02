@@ -52,11 +52,11 @@ Unlike traditional energy generation technologies, the efficiency and profitabil
 
 The high degree of spatial and temporal variation of wind speeds leads to large uncertainty when making wind farm investment decisions. In this article we propose a simple sequential Bayesian decision model that takes into account spatial uncertainty and allows for the option of waiting to collect more information on wind speeds.
 
-We first introduce a simple two period toy model with linear loss function. This simple model can be solved analytically, generating some stylized results that provide intuition and a frameworks for interpreting more complicated models. 
+We first introduce a simple two period model with linear loss function that can be solved analytically, generating some stylized results that provide intuition and a frameworks for interpreting more complicated models. We then introduce a case study with data from a proposed wind farm in Northern Norway. In this model we introduce realistic features, such as a non-linear power-output function for a wind turbine.
 
-We then introduce a case study with data from a proposed wind farm in Northern Norway. We introduce realistic wind turbine power output function and investment loss functions that reflect the real-life non-linear relationship between wind-speeds and power generation. 
+We use the Bayesian posterior sampling and modeling language Stan \citep{stan_development_team_stan} to simulate sampling from the posterior. This approach allows the model to be easily extended to take into account, for example, price and regulatory uncertainty - though for the sake of brevity and clarity, we do not pursue these extensions here. However, we provide well documented code and data online \url{jmaurit.github.io#wind_invest_model}.
 
-We use the Bayesian posterior sampling and modeling language Stan \citep{stan_development_team_stan} to simulate sampling from the posterior. This approach allows the model to be easily extended to take into account, for example, price and regulatory uncertainty - though for the sake of brevity and clarity, we do not pursue these extensions here.
+\section{Literature}
 
 
 \section{Analytic Frameworks}
@@ -74,25 +74,30 @@ Figure \ref{avg_wind_speed_data} shows a chart of the average monthly wind speed
 	\label{avg_wind_speed_data}
 \end{figure}
 
-Wind speeds measured at shorter intervals are known to roughly follow a weibull distribution \footnote{A weibull distribution is defined as having a probability distribution function of $f(x, \lambda, k) = \frac{k}{\lambda} \frac{x}{\lambda}^{k-1} e^{-\frac{x}{\lambda}^k}$}. Thus we use the formula for the mean of a weibull distribution, as shown in equation \ref{mean_weibull}. Here $Gamma$ represents the Gamma function.
+Wind speeds measured at shorter intervals are known to roughly follow a weibull distribution \citep{weibull_statistical_1951}. \footnote{A weibull distribution is defined as having a probability distribution function of $f(x, \sigma, \alpha) = \frac{\alpha}{\sigma} \frac{x}{\sigma}^{\alpha-1} e^{-\frac{x}{\sigma}^k}$} Thus we use the formula for the mean of a weibull distribution, as shown in equation \ref{mean_weibull}. Here $Gamma$ represents the Gamma function.
 
 \begin{equation}
-\mu_{weibull} = k*Gamma(1+\frac{1}{\lambda})^2
+\mu_{weibull} = \alpha*Gamma(1+\frac{1}{\sigma})^2
 \label{mean_weibull}
 \end{equation}
 
-A simple least-squares optimisation routine is run in order to choose point estimates for the $k$ and $\lambda$ values of a weibull distribution that best fit the data on monthly average wind speeds. From this optimisation, estimates of the shape parameter $k_hat = .6$ and the scale parameter $lambda_hat = 3.2$ are found.  This corresponds to a weibull distribution with the pdf as shown in figure \ref{avg_wind_speed_data}. A histogram of one year of hourly measurements (8760) are plotted along the probability distribution. 
+\begin{equation}
+min_{\alpha,\sigma} \sum_{i=1}^n (\mu_i - \alpha*Gamma(1+1/\sigma))^2
+\label{least_squares}
+\end{equation}
+
+Weibul parameter values of $\alpha$ and $\sigma$ are then chosen by minimizing equation \ref{least_squares}. From this optimisation, estimates of the shape parameter $k_hat = .6$ and the scale parameter $lambda_hat = 3.2$ are found.  This corresponds to a weibull distribution with the probability distribution as shown in figure \ref{weibull_distribution}. A histogram of one year of hourly measurements (8760) are plotted along with the probability distribution. 
 
 \begin{figure}
 	\includegraphics[width=1\textwidth]{figures/prior_distribution.png}
 	\caption{Weibull probability distribution of the prior predictive distribution of wind speeds for Andmyran. The histogram represents 8640 random draws from the distribution, consisting of one year of hourly measurements.}
-	\label{avg_wind_speed_data}
+	\label{weibull_distribution}
 \end{figure}
 
-To transform the simulated wind speed data from the weibull distribution to power output data, I use the power curve of a common commercial wind turbine: the Vestas V90 turbine. The power curve can be seen in the top panel of figure \ref{power_output}. At wind speeds up to 4 meters per second (m/s), no power is produced. Between speeds of 4 and 15 m/s, power output rapidly increases with respect to wind speed. The rated power output is reached at wind speeds of between 15 and 25 m/s, after which power is cut-out in order to protect the turbine. 
+To transform the simulated wind speed data from the weibull distribution to power output, I use the power curve of a common commercial wind turbine: the Vestas V90 turbine \citep{vestas_v90}. The power curve can be seen in the top panel of figure \ref{power_output}. At wind speeds up to 4 meters per second (m/s), no power is produced. Between speeds of 4 and 15 m/s, power output rapidly increases with respect to wind speed. The rated power output is reached at wind speeds of between 15 and 25 m/s, after which power is cut-out in order to protect the turbine. 
 
 \begin{figure}
-	\includegraphics[width=1\textwidth]{figures/power_output.png}
+	\includegraphics[width=.6\textwidth]{figures/power_output.png}
 	\caption{Weibull probability distribution of the prior predictive distribution of wind speeds for Andmyran. The histogram represents 8640 random draws from the distribution, consisting of one year of hourly measurements.}
 	\label{power_output}
 \end{figure}
@@ -109,7 +114,7 @@ L_{wait-pass} = M + I - d(p_{kwh} - c_{kwh})*kwh
 \label{loss_functions}
 \end{align}
 
-These functions describe the losses associated with investing or passing in the first period as well as waiting and then deciding. $I$ represents the lump-sum investment cost, $p_KWH$ is the price per kilowatt-hour (kWh) for the electricity produced. $c_kwh$ represents any running costs. $d$ represents a discount rate on the opportunity cost of not investing - the intuition here is that the capital could be put in place in some other investment that gains a return. $M$ represents the cost associated with waiting and gathering data. This could include the cost of installing and monitoring a wind-measuring station.
+These functions describe the losses associated with investing or passing in the first period as well as waiting and then deciding. $I$ represents the lump-sum investment cost, $p_{kwh}$ is the price per kilowatt-hour (kWh) for the electricity produced. $c_{kwh}$ represents any running costs. $d$ represents a discount rate on the opportunity cost of not investing - the intuition here is that the capital could be put in place in some other investment that gains a return. $M$ represents the cost associated with waiting and gathering data. This could include the cost of installing and monitoring a wind-measuring station.
 
 Given the loss functions for the different choices with parameters: $I=100,000$, $c_{oper}=0.005$, $p_{kwh}$, $d=.90$, $M=0$ we then draw 500 sample years of hourly wind data. At the first stage the investor can either choose to invest, to pass, or to wait and gather more information. The distribution of the losses for each sampled year for these three choices are shown in figure \ref{losses}.
 
@@ -120,9 +125,9 @@ Given the loss functions for the different choices with parameters: $I=100,000$,
 	\label{losses}
 \end{figure}
 
-With the chosen parameters there is a high degree of prior uncertainty about whether a project will be profitable or not. Thus there is a high degree of value in waiting. The strong assumption in calculating the expected loss of waiting is that the investor will know with certainty whether investing is profitable or not after having gathered more information. This is why the expected loss of waiting in this simulation is always less than zero.
+With the chosen parameters there is a high degree of prior uncertainty about whether a project will be profitable or not. Thus there is a high degree of value in waiting. The strong assumption in calculating the expected loss of waiting is that the investor will know with certainty whether investing is profitable or not after having gathered more information. This is why the expected loss of waiting in this simulation is always less than zero. This assumption can easily be relaxed.
 
-Taking the expected value of each distribution from this particular case, we get the values shown in table \ref{table:expected_losses}. Clearly, the value of waiting in this example are quite high. One way of interpreting the result would be to say that it would be worthwhile to wait and gather more information if the cost of gathering the information, $M$ were less than 1539 (1609-70.4.) Otherwise, you would pass on making the investment. 
+Taking the expected value from these samples, we get the values shown in table \ref{table:expected_losses}. Clearly, the value of waiting in this example are quite high. One way of interpreting the result would be to say that it would be worthwhile to wait and gather more information if the cost of gathering the information, $M$ were less than 1539 (1609-70.4.) Otherwise, you would pass on making the investment. 
 
 \begin{table}
 \begin{center}
@@ -137,7 +142,7 @@ $E(loss_{wait})$ & -1609.4 \\
 \end{center}
 \end{table}
 
-Having decided to wait and gather more information, the next step is then to update the prior distribution with the gathered data and obtain a posterior distribution with which to make a new investment decision.
+Having decided to wait and gather more information, the next step is then to update the prior distribution with the likelihood obtained from the gathered data and obtain a posterior distribution with which to make a new investment decision.
 
 The simple model can be expressed as in equation \ref{bayes_model}. The first term expresses the likelihood as a weibull function with shape parameter $\alpha$ and scale parameter $\sigma$. In turn these parameters are given informative prior distributions with means $\hat{\alpha}$ and $\hat{\sigma}$ that are estimated from the publicly available data on average wind speeds in the area, as detailed earlier.   
 
@@ -148,13 +153,13 @@ sigma &\sim normal(\hat{\sigma}, 1)
 \label{bayes_model}
 \end{align}
 
-To sample from the posterior distribution $p(alpha, sigma|wind-data)$ we use the bayesian programming language and Markov Chain Monte Carlo (MCMC) sampler Stan. Stan utilizes Hamiltonian Monte Carlo to efficiently simulate sampling from the posterior. 
+To sample from the posterior distribution $p(alpha, sigma|wind-data)$ we use the bayesian programming language and Markov Chain Monte Carlo (MCMC) sampler Stan via the python interface pyStan \citep{stan_development_team_pystan:_2014}. Stan utilizes Hamiltonian Monte Carlo to efficiently simulate sampling from the posterior. 
 
-Other popular simulation tools are widely available like BUGS and JAGS, but we chose to use Stan because of the flexibility of its modeling language and the efficiency of its sampling routine. While the case outlined hear is quite simple, the model can be easily extended with Stan to include other sources of uncertainty relevant to the real-life investment decision.
+Other popular simulation tools are widely available like BUGS and JAGS, but we choose to use Stan because of the flexibility of its modeling language and the efficiency of its sampling routine. While the case outlined hear is quite simple, the model can be easily extended with Stan to include other sources of uncertainty relevant to the realistic investment decision.
 
-The wind data is taken from actual wind measurement data at the appropriate height at the sight of the proposed Andmyran wind farm. We use 1 year of hourly measurements - or 8780 data points in the updating of the posterior distribution. 
+The wind data is taken from actual wind measurement data at the appropriate height at the site of the proposed Andmyran wind farm. We use 1 year of hourly measurements - or 8780 data points to update the posterior distribution. 
 
-Figure \ref{posteriors} shows a histogram of draws from the posterior distributions of the shape parameter $\alpha$ in the top panel and the scale paramter $\sigma$.
+Figure \ref{posteriors} shows results from the MCMC sampling in the form of a histogram of draws from the posterior distributions of the shape parameter $\alpha$ in the top panel and the scale paramter $\sigma$ in the bottom parameter.
 
 \begin{figure}
 	\centering

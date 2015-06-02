@@ -179,7 +179,7 @@
 			"file": "wind_investment.tex",
 			"settings":
 			{
-				"buffer_size": 14173,
+				"buffer_size": 14508,
 				"line_ending": "Unix"
 			}
 		},
@@ -187,7 +187,7 @@
 			"file": "wind_investment.bib",
 			"settings":
 			{
-				"buffer_size": 1146,
+				"buffer_size": 1148,
 				"line_ending": "Unix"
 			}
 		},
@@ -333,12 +333,12 @@
 	},
 	"file_history":
 	[
+		"/Users/johannesmauritzen/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/johannesmauritzen/Google Drive/Python/econ_quant/kalman.py",
 		"/Users/johannesmauritzen/Google Drive/Python/econ_quant/kalman_problems.py",
 		"/Users/johannesmauritzen/Google Drive/Python/econ_quant/kalman_examples.py",
 		"/Users/johannesmauritzen/Dropbox/market_power/IJIO/rr_analysis.py",
 		"/Users/johannesmauritzen/Dropbox/market_power/IJIO/rr_dataClean.py",
-		"/Users/johannesmauritzen/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/johannesmauritzen/Dropbox/market_power/IJIO/rr_regressions.py",
 		"/Users/johannesmauritzen/Dropbox/market_power/IJIO/rr_notes.txt",
 		"/Users/johannesmauritzen/Dropbox/market_power/empirical_part.tex",
@@ -581,15 +581,15 @@
 					"file": "wind_investment.tex",
 					"settings":
 					{
-						"buffer_size": 14173,
+						"buffer_size": 14508,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								5923,
+								5923
 							]
 						],
 						"settings":
@@ -608,15 +608,15 @@
 					"file": "wind_investment.bib",
 					"settings":
 					{
-						"buffer_size": 1146,
+						"buffer_size": 1148,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								730,
-								730
+								406,
+								406
 							]
 						],
 						"settings":
@@ -625,7 +625,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 574.0,
+						"translation.y": 281.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

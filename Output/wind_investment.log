@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.10.11)  1 JUN 2015 16:50
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.10.11)  2 JUN 2015 15:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -246,11 +246,7 @@ Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 337.
 Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 338.
 Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 339.
 Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 340.
-) (Output/wind_investment.aux
-
-LaTeX Warning: Label `avg_wind_speed_data' multiply defined.
-
-)
+) (Output/wind_investment.aux)
 \openout1 = `wind_investment.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
@@ -365,68 +361,65 @@ Package pdftex.def Info: figures/avg_wind_speed_data.png used on input line 72.
 [2] <figures/prior_distribution.png, id=27, 722.7pt x 433.62pt>
 File: figures/prior_distribution.png Graphic file (type png)
 <use figures/prior_distribution.png>
-Package pdftex.def Info: figures/prior_distribution.png used on input line 87.
+Package pdftex.def Info: figures/prior_distribution.png used on input line 92.
 (pdftex.def)             Requested size: 469.75502pt x 281.85628pt.
 <figures/power_output.png, id=28, 578.16pt x 578.16pt>
 File: figures/power_output.png Graphic file (type png)
 <use figures/power_output.png>
-Package pdftex.def Info: figures/power_output.png used on input line 95.
-(pdftex.def)             Requested size: 469.75502pt x 469.75385pt.
+Package pdftex.def Info: figures/power_output.png used on input line 100.
+(pdftex.def)             Requested size: 281.85587pt x 281.85406pt.
 [3 <./figures/avg_wind_speed_data.png>] [4 <./figures/prior_distribution.png>] 
-[5 <./figures/power_output.png>] <figures/losses.png, id=41, 433.62pt x 722.7pt
+[5 <./figures/power_output.png>] <figures/losses.png, id=42, 433.62pt x 722.7pt
 >
 File: figures/losses.png Graphic file (type png)
 <use figures/losses.png>
-Package pdftex.def Info: figures/losses.png used on input line 118.
+Package pdftex.def Info: figures/losses.png used on input line 123.
 (pdftex.def)             Requested size: 281.85587pt x 469.78252pt.
-[6] [7 <./figures/losses.png>] <figures/posteriors.png, id=51, 433.62pt x 722.7
+[6] [7 <./figures/losses.png>] <figures/posteriors.png, id=52, 433.62pt x 722.7
 pt>
 File: figures/posteriors.png Graphic file (type png)
 <use figures/posteriors.png>
-Package pdftex.def Info: figures/posteriors.png used on input line 161.
+Package pdftex.def Info: figures/posteriors.png used on input line 166.
 (pdftex.def)             Requested size: 281.85587pt x 469.78252pt.
-[8] [9 <./figures/posteriors.png>] <figures/post_losses.png, id=59, 433.62pt x 
+[8] [9 <./figures/posteriors.png>] <figures/post_losses.png, id=60, 433.62pt x 
 433.62pt>
 File: figures/post_losses.png Graphic file (type png)
 <use figures/post_losses.png>
-Package pdftex.def Info: figures/post_losses.png used on input line 172.
+Package pdftex.def Info: figures/post_losses.png used on input line 177.
 (pdftex.def)             Requested size: 375.80544pt x 375.8238pt.
 [10 <./figures/post_losses.png>] (Output/wind_investment.bbl) [11] (Output/wind
-_investment.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+_investment.aux) ) 
 Here is how much of TeX's memory you used:
- 4140 strings out of 493315
- 59869 string characters out of 6137903
- 128271 words of memory out of 5000000
- 7513 multiletter control sequences out of 15000+600000
+ 4151 strings out of 493315
+ 60182 string characters out of 6137903
+ 129338 words of memory out of 5000000
+ 7524 multiletter control sequences out of 15000+600000
  10467 words of font info for 39 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,9n,32p,694b,298s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
-/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></u
-sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
-/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/l
-ocal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/loc
-al/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local
-/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/t
-exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/tex
-live/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texliv
-e/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2
-013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2013
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2013/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2013/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2013/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2013/texmf
--dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on Output/wind_investment.pdf (11 pages, 424854 bytes).
+ 38i,9n,32p,698b,302s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmbx10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmbx12.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmex10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmmi10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi5.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmmi6.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+mi8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
+9.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.
+pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pf
+b></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
+</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></u
+sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/
+local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/loc
+al/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loca
+l/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/
+texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/te
+xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/tex
+live/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on Output/wind_investment.pdf (11 pages, 435261 bytes).
 PDF statistics:
- 125 PDF objects out of 1000 (max. 8388607)
- 81 compressed objects within 1 object stream
+ 129 PDF objects out of 1000 (max. 8388607)
+ 84 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

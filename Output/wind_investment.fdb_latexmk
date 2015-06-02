@@ -1,14 +1,14 @@
 # Fdb version 3
-["bibtex Output/wind_investment"] 1433173850 "Output/wind_investment.aux" "Output/wind_investment.bbl" "Output/wind_investment" 1433173853
+["bibtex Output/wind_investment"] 1433251604 "Output/wind_investment.aux" "Output/wind_investment.bbl" "Output/wind_investment" 1433251606
   "/usr/local/texlive/2013/texmf-dist/bibtex/bst/natbib/plainnat.bst" 1233624470 26816 ffe5423d2019860bad9f54bc402fac15 ""
-  "Output/wind_investment.aux" 1433173852 2428 c08f09b49dcd208f6a82b7d006f766d9 ""
+  "Output/wind_investment.aux" 1433251605 2829 1096ecf70890ad617692f66b44c11f8e ""
   "Output/wind_investment.bcf" 0 -1 0 ""
-  "wind_investment.bib" 1433173786 1146 3bb0803fb4ec6009d52f2268356bb232 ""
+  "wind_investment.bib" 1433251586 1148 c70ba613ea2d0cd60f542ef59f9c70ce ""
   (generated)
   "Output/wind_investment.bbl"
   "Output/wind_investment.blg"
-["pdflatex"] 1433173850 "/Users/johannesmauritzen/research/wind_invest_model/wind_investment.tex" "Output/wind_investment.pdf" "wind_investment" 1433173853
-  "/Users/johannesmauritzen/research/wind_invest_model/wind_investment.tex" 1433173844 14173 02a24329bdcb34cb9036c51572874273 ""
+["pdflatex"] 1433251604 "/Users/johannesmauritzen/research/wind_invest_model/wind_investment.tex" "Output/wind_investment.pdf" "wind_investment" 1433251606
+  "/Users/johannesmauritzen/research/wind_invest_model/wind_investment.tex" 1433251598 14508 85b8c136f29f604a94a48aae9c7106b5 ""
   "/usr/local/texlive/2013/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2013/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2013/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -35,6 +35,7 @@
   "/usr/local/texlive/2013/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm" 1136768653 768 1321e9409b4137d6fb428ac9dc956269 ""
   "/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb" 1248133631 34811 78b52f49e893bcba91bd7581cdc144c0 ""
   "/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1248133631 32080 340ef9bf63678554ee606688e7b5339d ""
+  "/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1248133631 30251 6afa5cb1d0204815a708a080681d4674 ""
   "/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb" 1248133631 37912 77d683123f92148345f3fc36a38d9ab1 ""
   "/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb" 1248133631 37166 8ab3487cbe3ab49ebce74c29ea2418db ""
@@ -96,16 +97,16 @@
   "/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1369923225 1072746 3ce1f23f203cb4a0015ca3c8411dee4a ""
   "/usr/local/texlive/2013/texmf-var/web2c/pdftex/pdflatex.fmt" 1381505969 3827030 eccb5e2f3bd3dae155905b64b091950e ""
   "/usr/local/texlive/2013/texmf.cnf" 1369923207 577 cbc827f6294276973a1952e86e8ad73a ""
-  "Output/wind_investment.aux" 1433173852 2428 c08f09b49dcd208f6a82b7d006f766d9 ""
-  "Output/wind_investment.bbl" 1433173850 522 da6ccbb472b170840065cfdcb10fa2c7 "bibtex Output/wind_investment"
+  "Output/wind_investment.aux" 1433251605 2829 1096ecf70890ad617692f66b44c11f8e ""
+  "Output/wind_investment.bbl" 1433251604 1199 2dfed7451fcd7ac0d23f34a647af984b "bibtex Output/wind_investment"
   "figures/avg_wind_speed_data.png" 1432653800 51471 bd055f61862cfa3ededdcdaa5aad2400 ""
   "figures/losses.png" 1433063127 48103 54da1b264ead8e928d1012bc71058462 ""
   "figures/post_losses.png" 1433172340 30809 c3b61d1134c1fd1955aa4abb3b3ffda2 ""
   "figures/posteriors.png" 1433157090 53029 4254ed2b9f5273d0e8bff0aa0eaa14ef ""
   "figures/power_output.png" 1432889492 40711 f8cbeb34b67c175a506410f775cf7343 ""
   "figures/prior_distribution.png" 1432806657 27730 ac8de69deefb4e2603c2a54e0ef7bf6a ""
-  "wind_investment.tex" 1433173844 14173 02a24329bdcb34cb9036c51572874273 ""
+  "wind_investment.tex" 1433251598 14508 85b8c136f29f604a94a48aae9c7106b5 ""
   (generated)
   "Output/wind_investment.pdf"
-  "Output/wind_investment.log"
   "Output/wind_investment.aux"
+  "Output/wind_investment.log"
