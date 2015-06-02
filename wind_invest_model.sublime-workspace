@@ -179,7 +179,15 @@
 			"file": "wind_investment.tex",
 			"settings":
 			{
-				"buffer_size": 4821,
+				"buffer_size": 14173,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "wind_investment.bib",
+			"settings":
+			{
+				"buffer_size": 1146,
 				"line_ending": "Unix"
 			}
 		},
@@ -187,7 +195,7 @@
 			"file": "simple_invest_model.py",
 			"settings":
 			{
-				"buffer_size": 7652,
+				"buffer_size": 8824,
 				"line_ending": "Unix",
 				"name": "simple_invest_model.py"
 			}
@@ -573,7 +581,7 @@
 					"file": "wind_investment.tex",
 					"settings":
 					{
-						"buffer_size": 4821,
+						"buffer_size": 14173,
 						"regions":
 						{
 						},
@@ -586,28 +594,56 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/LaTeXing/support/LaTeX.tmLanguage"
+							"syntax": "Packages/LaTeXing/support/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 325.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "simple_invest_model.py",
+					"file": "wind_investment.bib",
 					"settings":
 					{
-						"buffer_size": 7652,
+						"buffer_size": 1146,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2080,
-								2049
+								730,
+								730
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/Bibtex.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 574.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "simple_invest_model.py",
+					"settings":
+					{
+						"buffer_size": 8824,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8808,
+								8785
 							]
 						],
 						"settings":
@@ -617,13 +653,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1499.0,
+						"translation.y": 8961.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 3,
 					"file": "WindAnalysis.R",
 					"settings":
 					{
@@ -643,13 +679,13 @@
 							"syntax": "Packages/R/R.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 139.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "wind_investment_notes.txt",
 					"settings":
 					{
@@ -676,7 +712,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "power_curve.py",
 					"settings":
 					{
@@ -704,7 +740,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "wind_turbine.py",
 					"settings":
 					{
@@ -732,7 +768,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 7,
 					"file": "wind_prior_generation.py",
 					"settings":
 					{
@@ -754,7 +790,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1252.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

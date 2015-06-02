@@ -73,6 +73,11 @@ wind_sample = andmyran_prior.sample_from_prior()
 fig, ax = plt.subplots()
 ax.plot(wind, prior)
 ax.hist(wind_sample, normed=1, bins=100)
+ax.set_xlim(0,60)
+ax.set_ylabel("Probability Density")
+ax.set_xlabel("Wind Speed")
+fig.set_size_inches(10,6)
+fig.savefig("figures/prior_distribution.png")
 plt.show()
 
 #convert prior_winds to power output
@@ -82,6 +87,22 @@ power_kw_v90=np.array([85, 200, 350, 590, 900, 1300, 1720, 2150, 2560, 2840, 298
 
 #Create instance of a wind turbine
 v90_turbine = wind_turbine(curve_speeds=wind_speed, power_points = power_kw_v90)
+
+wind=np.linspace(0,30,200)
+output = v90_turbine(wind)
+
+power_sample=v90_turbine(wind_sample)
+
+fig, (ax1, ax2) = plt.subplots(2)
+ax1.plot(wind, output, "-")
+ax1.set_xlabel("Wind Speed, m/s")
+ax1.set_ylabel("Power Output, kW")
+ax2.hist(power_sample, bins=50, normed=1)
+ax2.set_xlabel("Power Output")
+ax2.set_ylabel("Density")
+fig.set_size_inches(8,8)
+fig.savefig("figures/power_output.png")
+plt.show()
 
 power_output = np.sum(v90_turbine(wind_sample))
 
@@ -131,10 +152,16 @@ for kwh in kwh_dist:
 	dist_loss_pass.append(loss_pass(kwh, I , c_oper, p_kwh, d))
 	dist_loss_wait.append(loss_wait(kwh, I, c_oper, p_kwh, d, M))
 
-fig, (ax1, ax2, ax3) = plt.subplots(3)
-ax1.hist(dist_loss_invest, bins=50)
-ax2.hist(dist_loss_pass, bins=50)
-ax3.hist(dist_loss_wait, bins=50)
+fig, (ax1, ax2, ax3) = plt.subplots(3, sharex=True)
+ax1.hist(dist_loss_invest, bins=50, normed=1)
+ax1.set_xlabel("Expected Losses, Invest")
+ax2.hist(dist_loss_pass, bins=50, normed=1)
+ax2.set_xlabel("Expected Losses, Pass")
+ax3.hist(dist_loss_wait, bins=50, normed=1)
+ax3.set_xlabel("Expected Losses, Wait")
+fig.tight_layout()
+fig.set_size_inches(6, 10)
+fig.savefig("figures/losses.png")
 plt.show()
 
 exp_loss_invest = np.sum(dist_loss_invest)/len(dist_loss_invest)
@@ -180,6 +207,7 @@ trial_data=pd.read_csv("Andmyran_2000.csv")
 w=trial_data.Andmyran_a1.tolist()
 N=len(trial_data)
 
+
 wind_invest_data = {'N': N ,
 	'w': w,
 	'alpha_hat':alpha_hat,
@@ -209,41 +237,41 @@ alpha_post_dist = la['alpha'].copy()
 sigma_post_dist = la['sigma'].copy()
 #log_posterior = la['lp__'].copy()
 
-plt.hist(alpha_dist, bins=100)
-plt.show()
 
-means=[sigma_hat[i]*math.gamma(1+1/alpha_hat[i]) for i in range(len(sigma_hat))]
-
-fig, (ax1, ax2, ax3) = plt.subplots(3)
-ax1.hist(alpha_hat, bins=100)
-ax2.hist(sigma_hat, bins=100)
-ax3.hist(means, bins=100)
-plt.show()
+means=[sigma_post_dist[i]*math.gamma(1+1/alpha_post_dist[i]) for i in range(len(sigma_post_dist))]
 
 def weib(x,s,a):
      return (a / s) * (x / s)**(a - 1) * np.exp(-(x / s)**a)
 
 x_wind=np.linspace(0,50,200)
 
-fig, ax = plt.subplots()
+fig, (ax1, ax2, ax3) = plt.subplots(3)
+ax1.hist(alpha_post_dist, bins=100, normed=1)
+ax1.set_xlabel(r'$\alpha$ posterior distribution')
+ax2.hist(sigma_post_dist, bins=100, normed=1)
+ax2.set_xlabel(r'$\sigma$ posterior distribution')
 for i in range(1000):
 	wind_dist=[weib(x, sigma_post_dist[i], alpha_post_dist[i]) for x in x_wind]
-	ax.plot(x_wind, wind_dist, alpha=.1)
-ax.hist(w, normed=1, bins=50)
+	ax3.plot(x_wind, wind_dist, alpha=.1)
+ax3.hist(w, normed=1, bins=100)
+ax3.set_xlim(0,30)
+ax3.set_xlabel("Posterior weibul distribution of wind speeds")
+fig.tight_layout()
+fig.set_size_inches(6, 10)
+fig.savefig("figures/posteriors.png")
 plt.show()
 
 post_yearly_power=[]
 #generate
 for i in range(100):
-	sigma_post_sample = random.sample(list(sigma_post_dist), 8760)
-	alpha_post_sample = random.sample(list(alpha_post_dist), 8760)
+	sigma_post_sample = np.random.choice(sigma_post_dist, 8760)
+	alpha_post_sample = np.random.choice(alpha_post_dist, 8760)
 	posterior_wind_data = [float(weibull_min.rvs(c=alpha_post_sample[i], 
 	scale=sigma_post_sample[i], size=1)) for i in range(len(alpha_post_sample))]
 	post_power_dist = v90_turbine(posterior_wind_data)
 	post_yearly_power.append(np.sum(post_power_dist))
 
 post_kwh_dist = post_yearly_power
-
 post_dist_invest=[]
 post_dist_pass=[]
 
@@ -251,13 +279,16 @@ for kwh in post_kwh_dist:
 	post_dist_invest.append(loss_invest(kwh, I, c_oper, p_kwh))
 	post_dist_pass.append(loss_pass(kwh, I , c_oper, p_kwh, d))
 
-fig, (ax1, ax2) =plt.subplots(2)
+fig, (ax1, ax2) =plt.subplots(2, sharex=True)
 ax1.hist(post_dist_invest, normed=1)
-ax1.set_title("Losses, Invest")
-ax1.set_xlim([-120000,110000])
+ax1.set_xlabel("Posterior Expected Losses, Invest")
+ax1.set_ylabel("Probability Distribution")
 ax2.hist(post_dist_pass, normed=1)
-ax2.set_title("Losses, Pass")
-ax2.set_xlim([-120000,110000])
+ax2.set_xlabel("Posterior Expected Losses, Pass")
+ax2.set_ylabel("Probability Distribution")
+fig.tight_layout()
+fig.set_size_inches(6, 6)
+fig.savefig("figures/post_losses.png")
 plt.show()
 
 
