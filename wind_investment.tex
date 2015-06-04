@@ -50,7 +50,7 @@
 
 Unlike traditional energy generation technologies, the efficiency and profitability of wind turbines and wind farms are highly dependent on their location. Even modest differences in long-term average wind speeds can have major consequences on the profitability of wind farms over time. However, the inherent appropriateness of a given location is subject to a high degree of uncertainty as wind speeds can vary substantially even within areas where overall wind resources are good. More so, average wind speeds show a high degree of variance from month-to-month and even year-to-year.
 
-The high degree of spatial and temporal variation of wind speeds leads to large uncertainty when making wind farm investment decisions. In this article we propose a simple sequential Bayesian decision model that takes into account spatial uncertainty and allows for the option of waiting to collect more information on wind speeds.
+The high degree of spatial and temporal variation of wind speeds leads to large uncertainty when making wind farm investment decisions. In this article we propose a simple sequential Bayesian decision model that takes into account spatial uncertainty and allows for the option of waiting to collect more information on wind speeds. This method mimics actual behavior of wind power investors, who tend to make decisions on a sequential basis. 
 
 We first introduce a simple two period model with linear loss function that can be solved analytically, generating some stylized results that provide intuition and a frameworks for interpreting more complicated models. We then introduce a case study with data from a proposed wind farm in Northern Norway. In this model we introduce realistic features, such as a non-linear power-output function for a wind turbine.
 
@@ -66,7 +66,7 @@ We use the Bayesian posterior sampling and modeling language Stan \citep{stan_de
 
 We consider the case of the proposed Andmyran wind farm, located on an island in northern Norway. To establish the basis for the prior beliefs about the wind resources of the given location, we gather publicly available information on average wind speeds from three nearby weather stations: Andenes, Harstad and Sortland. This is obtained from the website of the Norwegian Meteorological Society's public weather page, \url{yr.no}. 
 
-Figure \ref{avg_wind_speed_data} shows a chart of the average monthly wind speeds for the three sites. We can note the significant variation in average wind speed between the sites, even though they are all within 50 kilometers of one another. 
+Figure \ref{avg_wind_speed_data} shows a chart of the average monthly wind speeds for the three sites. We can note the significant variation in average wind speed between the sites, even though they are all within 60 kilometers of one another. 
 
 \begin{figure}
 	\includegraphics[width=1\textwidth]{figures/avg_wind_speed_data.png}
@@ -74,19 +74,19 @@ Figure \ref{avg_wind_speed_data} shows a chart of the average monthly wind speed
 	\label{avg_wind_speed_data}
 \end{figure}
 
-Wind speeds measured at shorter intervals are known to roughly follow a weibull distribution \citep{weibull_statistical_1951}. \footnote{A weibull distribution is defined as having a probability distribution function of $f(x, \sigma, \alpha) = \frac{\alpha}{\sigma} \frac{x}{\sigma}^{\alpha-1} e^{-\frac{x}{\sigma}^k}$} Thus we use the formula for the mean of a weibull distribution, as shown in equation \ref{mean_weibull}. Here $Gamma$ represents the Gamma function.
+Wind speeds measured at shorter intervals are known to roughly follow a weibull distribution \citep{weibull_statistical_1951}. \footnote{A weibull distribution is defined as having a probability distribution function of $f(x, \sigma, \alpha) = \frac{\alpha}{\sigma} \big(\frac{x}{\sigma}\big)^{\alpha-1} e^{-\big(\frac{x}{\sigma}\big)^k}$} Thus we use the formula for the mean of a weibull distribution, as shown in equation \ref{mean_weibull}. Here $Gamma$ represents the Gamma function.
 
 \begin{equation}
-\mu_{weibull} = \alpha*Gamma(1+\frac{1}{\sigma})^2
+\mu_{weibull} = \sigma*Gamma(1+\frac{1}{\alpha})
 \label{mean_weibull}
 \end{equation}
 
 \begin{equation}
-min_{\alpha,\sigma} \sum_{i=1}^n (\mu_i - \alpha*Gamma(1+1/\sigma))^2
+min_{\alpha,\sigma} \sum_{i=1}^n (\mu_i - \sigma*Gamma(1+1/\alpha))^2
 \label{least_squares}
 \end{equation}
 
-Weibul parameter values of $\alpha$ and $\sigma$ are then chosen by minimizing equation \ref{least_squares}. From this optimisation, estimates of the shape parameter $k_hat = .6$ and the scale parameter $lambda_hat = 3.2$ are found.  This corresponds to a weibull distribution with the probability distribution as shown in figure \ref{weibull_distribution}. A histogram of one year of hourly measurements (8760) are plotted along with the probability distribution. 
+Weibul parameter values of $\alpha$ and $\sigma$ are then chosen by minimizing equation \ref{least_squares}. From this optimisation, estimates of the shape parameter $\hat{\alpha} = .6$ and the scale parameter $\hat{\sigma} = 3.2$ are found.  This corresponds to a weibull distribution with the probability distribution as shown in figure \ref{weibull_distribution}. A histogram of one year of hourly measurements (8760) are plotted along with the probability distribution. 
 
 \begin{figure}
 	\includegraphics[width=1\textwidth]{figures/prior_distribution.png}
@@ -97,7 +97,8 @@ Weibul parameter values of $\alpha$ and $\sigma$ are then chosen by minimizing e
 To transform the simulated wind speed data from the weibull distribution to power output, I use the power curve of a common commercial wind turbine: the Vestas V90 turbine \citep{vestas_v90}. The power curve can be seen in the top panel of figure \ref{power_output}. At wind speeds up to 4 meters per second (m/s), no power is produced. Between speeds of 4 and 15 m/s, power output rapidly increases with respect to wind speed. The rated power output is reached at wind speeds of between 15 and 25 m/s, after which power is cut-out in order to protect the turbine. 
 
 \begin{figure}
-	\includegraphics[width=.6\textwidth]{figures/power_output.png}
+	\centering
+	\includegraphics[width=.8\textwidth]{figures/power_output.png}
 	\caption{Weibull probability distribution of the prior predictive distribution of wind speeds for Andmyran. The histogram represents 8640 random draws from the distribution, consisting of one year of hourly measurements.}
 	\label{power_output}
 \end{figure}
@@ -120,7 +121,7 @@ Given the loss functions for the different choices with parameters: $I=100,000$,
 
 \begin{figure}
 	\centering
-	\includegraphics[width=.6\textwidth]{figures/losses.png}
+	\includegraphics[width=.8\textwidth]{figures/losses.png}
 	\caption{Distribution of losses for the decisions to invest, pass or wait.}
 	\label{losses}
 \end{figure}
@@ -185,7 +186,7 @@ This article has three main contributions. First, it recognizes that wind power 
 
 The second contribution is to model the sequential nature of a wind power investment by way of a Bayesian decision model where the spatial uncertainty can be modeled explicitly and where the option of waiting and gathering more data in order to update prior beliefs can be modeled naturally. 
 
-Finally, our implementation of the model using the open and flexible Bayesian modeling language and MCMC sampler Stan allows for straight-forward extensions that allows for me realism in the model. We hope and expect that the model could be easily extended by both other academics and we hope investors looking for a way to formalize their decision making processes.  We have posted all our code at \url{jmaurit.github.io#wind_invest_model}.
+Finally, our implementation of the model using the open and flexible Bayesian modeling language and MCMC sampler Stan allows for straight-forward extensions that allows for me realism in the model. We hope and expect that the model could be easily extended by both other academics and investors looking for a way to formalize their decision making processes.  We have posted all our code at \url{jmaurit.github.io#wind_invest_model}.
  
 \begin{spacing}{1}
 \bibliographystyle{plainnat}

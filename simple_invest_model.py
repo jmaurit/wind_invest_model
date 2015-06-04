@@ -46,7 +46,7 @@ harstad_smws = [10.6, 10.4, 14.0, 11.0, 15.5, 9.7, 7.0, 9.9, 7.4, 6.7, 9.8, 8.7]
 sortland_maws = [3.3, 4.8, 4.7, 3.5, 3.3, 3.3, 3.2, 3.4, 3.8, 3.9, 5.1, 4.0]
 sortland_smws = [11.8, 13.3, 22.5, 13.3, 12.3, 21.5, 11.8, 12.3, 9.7, 8.7, 15.9, 13.3]
 
-avg_wind_speed_data = pd.DataFrame({'month':month, 'andenes':andenes_maws, 
+avg_wind_speed_data = pd.DataFrame({'andenes':andenes_maws, 
 	'harstad':harstad_maws, 'sortland':sortland_maws})
 
 # fig, ax = plt.subplots()
@@ -78,6 +78,14 @@ ax.set_ylabel("Probability Density")
 ax.set_xlabel("Wind Speed")
 fig.set_size_inches(10,6)
 fig.savefig("figures/prior_distribution.png")
+plt.show()
+
+#check that data and distributions look similar
+sample_actual = np.random.choice(andmyran_prior.wind_data_long.value, size=1000)
+sample_simulated = [np.mean(andmyran_prior.sample_from_prior(years=1/12)) for i in range(1000)]
+
+fix, ax = plt.subplots()
+ax.hist(sample_actual)
 plt.show()
 
 #convert prior_winds to power output
