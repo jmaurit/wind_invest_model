@@ -179,7 +179,7 @@
 			"file": "wind_investment.tex",
 			"settings":
 			{
-				"buffer_size": 14508,
+				"buffer_size": 14650,
 				"line_ending": "Unix"
 			}
 		},
@@ -195,7 +195,7 @@
 			"file": "simple_invest_model.py",
 			"settings":
 			{
-				"buffer_size": 8824,
+				"buffer_size": 9095,
 				"line_ending": "Unix",
 				"name": "simple_invest_model.py"
 			}
@@ -239,9 +239,18 @@
 			"file": "wind_prior_generation.py",
 			"settings":
 			{
-				"buffer_size": 1798,
+				"buffer_size": 2016,
 				"line_ending": "Unix",
 				"name": "prior_generation.py"
+			}
+		},
+		{
+			"file": "wind_prior_experiment.py",
+			"settings":
+			{
+				"buffer_size": 1974,
+				"line_ending": "Unix",
+				"name": "wind_prior_experiment.py"
 			}
 		}
 	],
@@ -573,7 +582,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 8,
 			"sheets":
 			[
 				{
@@ -581,15 +590,15 @@
 					"file": "wind_investment.tex",
 					"settings":
 					{
-						"buffer_size": 14508,
+						"buffer_size": 14650,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5923,
-								5923
+								5296,
+								5296
 							]
 						],
 						"settings":
@@ -598,7 +607,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 4776.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -625,7 +634,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 281.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -635,15 +644,15 @@
 					"file": "simple_invest_model.py",
 					"settings":
 					{
-						"buffer_size": 8824,
+						"buffer_size": 9095,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8808,
-								8785
+								784,
+								1578
 							]
 						],
 						"settings":
@@ -653,7 +662,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 8961.0,
+						"translation.y": 473.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -679,7 +688,7 @@
 							"syntax": "Packages/R/R.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 139.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -772,15 +781,15 @@
 					"file": "wind_prior_generation.py",
 					"settings":
 					{
-						"buffer_size": 1798,
+						"buffer_size": 2016,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1181,
-								1144
+								673,
+								721
 							]
 						],
 						"settings":
@@ -789,8 +798,35 @@
 							"syntax": "Packages/Python/Python.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
+						"translation.x": 306.572265625,
+						"translation.y": 508.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "wind_prior_experiment.py",
+					"settings":
+					{
+						"buffer_size": 1974,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1654,
+								1782
+							]
+						],
+						"settings":
+						{
+							"auto_name": "wind_prior_experiment.py",
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1549.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

@@ -12,6 +12,8 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 from textwrap import dedent
+from scipy.stats import gamma
+
 
 
 import os
@@ -48,7 +50,11 @@ month_sd = wind_data.std(axis=1)
 
 location_means = wind_data.mean(axis=0)
 location_sd = wind_data.std(axis=0)
-series = 
+
+def weibul_sq_error(p, wind_series):
+	mu=wind_series
+	sq_errors=(mu - p[1] * math.gamma(1+1/p[0]))**2
+	return(sum(sq_errors))
 
 alpha_hat=np.empty(3)
 sigma_hat=np.empty(3)
@@ -56,14 +62,58 @@ for i in range(3):
 	alpha_hat[i], sigma_hat[i] = fmin(weibul_sq_error, [2,2], args=(wind_data.iloc[:,i].tolist(),))
 
 #now estimate k and theta from alphas and sigmas
-shape_alpha, location_alpha, scale_alpha = gamma.fit(alpha_hat)
-shape_sigma, location_sigma, scale_sigma = gamma.fit(sigma_hat)
+shape_alpha, location_alpha, scale_alpha = gamma.fit(alpha_hat, floc=0)
+shape_sigma, location_sigma, scale_sigma = gamma.fit(sigma_hat, floc=0)
 
-def gamma_sq_error(p, series):
-	mu=series
-	sq_errors=(mu - )**2
+#now, sample from gamma distributions to get alpha and sigma
+#then sample from weibul(alpha_hat, gamma_hat) to get data
 
-def weibul_sq_error(p, wind_series):
-	mu=wind_series
-	sq_errors=(mu - p[1] * math.gamma(1+1/p[0]))**2
-	return(sum(sq_errors))
+#show gamma distribution for alpha and gamma
+xs = np.linspace(0,6,200)
+pdf_alpha=gamma.pdf(xs, a=shape_alpha, loc=0, scale=scale_alpha)
+pdf_sigma=gamma.pdf(xs, a=shape_sigma, loc=0, scale=scale_sigma)
+
+fig, (ax1, ax2) = plt.subplots(2)
+ax1.plot(xs, pdf_alpha, "b-")
+ax1.set_xlabel(r"$\alpha$")
+ax2.plot(xs, pdf_sigma, "r-")
+ax2.set_xlabel(r"$\sigma$")
+fig.tight_layout()
+fig.set_size_inches(6, 8)
+fig.savefig("figures/priors.png")
+plt.show()
+
+
+#creating fake data by sampling
+
+alpha_hats = gamma.rvs(a=shape_alpha, loc=0, scale=scale_alpha, size=1000)
+sigma_hats = gamma.rvs(a=shape_sigma, loc=0, scale=scale_sigma, size=1000)
+gamma_params = [i for i in zip(alpha_hats, sigma_hats)]
+
+params = gamma_params[0]
+
+def generate_winds(params):
+	prior_winds=weibull_min.rvs(c=params[0], scale=(params[1]), size=720)
+	return(np.mean(prior_winds))
+
+month_sims = [generate_winds(i) for i in gamma_params]
+def under_45(x):
+	if x<45:
+		return(x)
+month_sims = [under_45(i) for i in month_sims]
+
+month_sims = np.array(month_sims).flatten()
+
+fig, ax = plt.subplots()
+ax.hist(month_sims, bins=10000)
+ax.set_xlim(0,30)
+plt.show()
+
+
+
+
+
+
+
+
+
