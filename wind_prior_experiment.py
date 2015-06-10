@@ -45,12 +45,6 @@ avg_wind_speed_data = pd.DataFrame({'andenes':andenes_maws,
 
 wind_data=avg_wind_speed_data
 
-month_means = wind_data.mean(axis=1)
-month_sd = wind_data.std(axis=1)
-
-location_means = wind_data.mean(axis=0)
-location_sd = wind_data.std(axis=0)
-
 def weibul_sq_error(p, wind_series):
 	mu=wind_series
 	sq_errors=(mu - p[1] * math.gamma(1+1/p[0]))**2
@@ -58,7 +52,7 @@ def weibul_sq_error(p, wind_series):
 
 alpha_hat=np.empty(3)
 sigma_hat=np.empty(3)
-for i in range(3):
+for i in range(wind_data.shape[1]):
 	alpha_hat[i], sigma_hat[i] = fmin(weibul_sq_error, [2,2], args=(wind_data.iloc[:,i].tolist(),))
 
 #now estimate k and theta from alphas and sigmas
@@ -80,7 +74,7 @@ ax2.plot(xs, pdf_sigma, "r-")
 ax2.set_xlabel(r"$\sigma$")
 fig.tight_layout()
 fig.set_size_inches(6, 8)
-fig.savefig("figures/priors.png")
+#fig.savefig("figures/priors.png")
 plt.show()
 
 
@@ -90,25 +84,41 @@ alpha_hats = gamma.rvs(a=shape_alpha, loc=0, scale=scale_alpha, size=1000)
 sigma_hats = gamma.rvs(a=shape_sigma, loc=0, scale=scale_sigma, size=1000)
 gamma_params = [i for i in zip(alpha_hats, sigma_hats)]
 
-params = gamma_params[0]
 
 def generate_winds(params):
 	prior_winds=weibull_min.rvs(c=params[0], scale=(params[1]), size=720)
-	return(np.mean(prior_winds))
+	return(prior_winds)
 
-month_sims = [generate_winds(i) for i in gamma_params]
-def under_45(x):
-	if x<45:
-		return(x)
-month_sims = [under_45(i) for i in month_sims]
-
-month_sims = np.array(month_sims).flatten()
-
+params = gamma_params[0]
+test_month = generate_winds(params)
 fig, ax = plt.subplots()
-ax.hist(month_sims, bins=10000)
+ax.hist(test_month, bins=100)
 ax.set_xlim(0,30)
 plt.show()
 
+month_sims = [generate_winds(i) for i in gamma_params]
+
+
+#now generate power
+wind_speed=np.array([4,5,6,7,8,9,10, 11, 12, 13, 14, 15])
+power_kw_v90=np.array([85, 200, 350, 590, 900, 1300, 1720, 2150, 2560, 2840, 2980, 3000])
+
+#Create instance of a wind turbine
+v90_turbine = wind_turbine(curve_speeds=wind_speed, power_points = power_kw_v90)
+
+month_power=[]
+
+for i in month_sims:
+	month_power.append(v90_turbine(i))
+
+avg_power=[]
+for i in month_power:
+	avg_power.append(np.array(i).sum())
+
+fig, ax = plt.subplots()
+ax.hist(avg_power, bins=30, normed=1)
+ax.set_xlabel()	
+plt.show()
 
 
 

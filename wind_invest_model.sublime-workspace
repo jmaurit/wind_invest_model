@@ -248,7 +248,7 @@
 			"file": "wind_prior_experiment.py",
 			"settings":
 			{
-				"buffer_size": 1974,
+				"buffer_size": 3190,
 				"line_ending": "Unix",
 				"name": "wind_prior_experiment.py"
 			}
@@ -607,7 +607,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4776.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -624,8 +624,8 @@
 						"selection":
 						[
 							[
-								406,
-								406
+								320,
+								320
 							]
 						],
 						"settings":
@@ -651,8 +651,8 @@
 						"selection":
 						[
 							[
-								784,
-								1578
+								5328,
+								5249
 							]
 						],
 						"settings":
@@ -662,7 +662,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 473.0,
+						"translation.y": 8515.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -788,8 +788,8 @@
 						"selection":
 						[
 							[
-								673,
-								721
+								1890,
+								1986
 							]
 						],
 						"settings":
@@ -798,8 +798,8 @@
 							"syntax": "Packages/Python/Python.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 306.572265625,
-						"translation.y": 508.0,
+						"translation.x": 0.0,
+						"translation.y": 351.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -809,15 +809,15 @@
 					"file": "wind_prior_experiment.py",
 					"settings":
 					{
-						"buffer_size": 1974,
+						"buffer_size": 3190,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1654,
-								1782
+								2989,
+								2989
 							]
 						],
 						"settings":
@@ -826,7 +826,7 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1549.0,
+						"translation.y": 2916.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

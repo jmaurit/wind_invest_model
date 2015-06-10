@@ -64,20 +64,40 @@ avg_wind_speed_data = pd.DataFrame({'andenes':andenes_maws,
 # plt.show()
 
 andmyran_prior = wind_prior_generation(avg_wind_speed_data)
+#andmyran_prior.sample_from_prior()
 
+#wind, prior = andmyran_prior.create_wind_prior()
+wind_sample = andmyran_prior.sample_from_prior(1000)
 
-wind, prior = andmyran_prior.create_wind_prior()
-wind_sample = andmyran_prior.sample_from_prior()
+#now generate power
+wind_speed=np.array([4,5,6,7,8,9,10, 11, 12, 13, 14, 15])
+power_kw_v90=np.array([85, 200, 350, 590, 900, 1300, 1720, 2150, 2560, 2840, 2980, 3000])
 
+#Create instance of a wind turbine
+v90_turbine = wind_turbine(curve_speeds=wind_speed, power_points = power_kw_v90)
+
+month_power=[]
+
+for i in wind_sample:
+	month_power.append(v90_turbine(i))
+
+avg_power=[]
+for i in month_power:
+	avg_power.append(np.array(i).sum())
 
 fig, ax = plt.subplots()
-ax.plot(wind, prior)
+ax.hist(avg_power, bins=30, normed=1)
+ax.set_xlabel()	
+fig.set_size_inches(10,6)
+fig.savefig("figures/prior_power_distribution.png")
+plt.show()
+
+fig, ax = plt.subplots()
 ax.hist(wind_sample, normed=1, bins=100)
 ax.set_xlim(0,60)
 ax.set_ylabel("Probability Density")
 ax.set_xlabel("Wind Speed")
-fig.set_size_inches(10,6)
-fig.savefig("figures/prior_distribution.png")
+
 plt.show()
 
 #check that data and distributions look similar
