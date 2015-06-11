@@ -64,7 +64,7 @@ shape_sigma, location_sigma, scale_sigma = gamma.fit(sigma_hat, floc=0)
 
 #show gamma distribution for alpha and gamma
 xs = np.linspace(0,6,200)
-pdf_alpha=gamma.pdf(xs, a=shape_alpha, loc=0, scale=scale_alpha)
+pdf_alpha=gamma.pdf(xs, a=shape_alpha, loc=.8, scale=scale_alpha)
 pdf_sigma=gamma.pdf(xs, a=shape_sigma, loc=0, scale=scale_sigma)
 
 fig, (ax1, ax2) = plt.subplots(2)
@@ -90,10 +90,10 @@ def generate_winds(params):
 	return(prior_winds)
 
 params = gamma_params[0]
+params = (.8,3)
 test_month = generate_winds(params)
 fig, ax = plt.subplots()
-ax.hist(test_month, bins=100)
-ax.set_xlim(0,30)
+ax.hist(test_month)
 plt.show()
 
 month_sims = [generate_winds(i) for i in gamma_params]

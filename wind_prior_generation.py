@@ -31,8 +31,8 @@ class wind_prior_generation(object):
 			self.alpha_hat[i], self.sigma_hat[i] = fmin(self.weibul_sq_error, [2,2], args=(self.wind_data.iloc[:,i].tolist(),))
 
 		#parameters for gamma distribution of alpha and sigma
-		self.shape_alpha, self.location_alpha, self.scale_alpha = gamma.fit(self.alpha_hat, floc=0)
-		self.shape_sigma, self.location_sigma, self.scale_sigma = gamma.fit(self.sigma_hat, floc=0)
+		self.shape_alpha, self.location_alpha, self.scale_alpha = gamma.fit(self.alpha_hat)
+		self.shape_sigma, self.location_sigma, self.scale_sigma = gamma.fit(self.sigma_hat)
 
 # 	def __call__(self):
 # 		m= """\
@@ -59,19 +59,20 @@ class wind_prior_generation(object):
 	# 	prior_dist=[self.weib(x, self.alpha_hat, self.sigma_hat*np.sqrt(3/2)) for x in x_wind]
 	# 	return(np.array([x_wind, prior_dist]))
 
-	def sample_from_prior(self, months=1):
+	def sample_from_prior(self, periods=1, length=720):
 		#now sample from distribution,
 		#start by drawing alpha hats and sigma hats for the distribution
 		alpha_hats = gamma.rvs(a=self.shape_alpha, 
-			loc=0, scale=self.scale_alpha, size=months)
+			loc=self.location_alpha, scale=self.scale_alpha, size=periods)
 		sigma_hats = gamma.rvs(a=self.shape_sigma,
-		 loc=0, scale=self.scale_sigma, size=months)
+		 loc=self.location_sigma, scale=self.scale_sigma, size=periods)
 		gamma_params = [i for i in zip(alpha_hats, sigma_hats)]
-		month_sims = [self.generate_winds(i) for i in gamma_params]
-		return(month_sims) #returns a list of monthly simulated data
+		month_sims = [self.generate_winds(i, length) for i in gamma_params]
+		results=[month_sims, gamma_params]
+		return(results) #returns a list of monthly simulated data
 
-	def generate_winds(self, p):
-		prior_winds=weibull_min.rvs(c=p[0], scale=(p[1]), size=720)
+	def generate_winds(self, p, length):
+		prior_winds=weibull_min.rvs(c=p[0], scale=(p[1]), size=length)
 		return(prior_winds)
 
 

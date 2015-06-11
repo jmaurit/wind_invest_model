@@ -11,12 +11,12 @@ from numpy import random as rd
 from scipy.stats import exponweib
 from scipy.stats import weibull_min
 import random
+from imp import reload
 
 import os
 os.chdir("/Users/johannesmauritzen/research/wind_invest_model/")
 from wind_turbine import wind_turbine
 from wind_prior_generation import wind_prior_generation
-
 
 
 #First Create Prior***********************************
@@ -67,9 +67,10 @@ andmyran_prior = wind_prior_generation(avg_wind_speed_data)
 #andmyran_prior.sample_from_prior()
 
 #wind, prior = andmyran_prior.create_wind_prior()
-wind_sample = andmyran_prior.sample_from_prior(1000)
+wind_sample, params_hat = andmyran_prior.sample_from_prior(1, 720)
+monthly_wind_samples, params_hats = andmyran_prior.sample_from_prior(1000, 720)
 
-#now generate power
+#now generate power curve for turbine
 wind_speed=np.array([4,5,6,7,8,9,10, 11, 12, 13, 14, 15])
 power_kw_v90=np.array([85, 200, 350, 590, 900, 1300, 1720, 2150, 2560, 2840, 2980, 3000])
 
@@ -78,70 +79,41 @@ v90_turbine = wind_turbine(curve_speeds=wind_speed, power_points = power_kw_v90)
 
 month_power=[]
 
-for i in wind_sample:
+for i in monthly_wind_samples:
 	month_power.append(v90_turbine(i))
 
 avg_power=[]
 for i in month_power:
 	avg_power.append(np.array(i).sum())
 
-fig, ax = plt.subplots()
-ax.hist(avg_power, bins=30, normed=1)
-ax.set_xlabel()	
-fig.set_size_inches(10,6)
+params_hat = np.array(params_hat).round(2)
+fig, (ax1, ax2, ax3) = plt.subplots(3)
+ax1.hist(wind_sample, bins=50, normed=1)
+ax1.set_xlabel(r'1 month of simulated hourly wind speeds (m/s), weibull distribution, $\alpha = {alpha_hat}$, $\sigma = {sigma_hat}$'.format(alpha_hat= params_hat[0][0], 
+	sigma_hat=params_hat[0][1]))
+ax1.set_xlim(0,50)
+ax1.set_ylabel("Density")
+ax2.plot(wind, output, "-")
+ax2.set_xlabel("Wind Speed, m/s")
+ax2.set_ylabel("Power Output, kW")
+ax3.hist(avg_power, bins=30, normed=1)
+ax3.set_xlabel("Simulated distribution of monthly power (kWh) produced")	
+ax3.set_ylabel("Density")
+fig.set_size_inches(10,8)
+fig.tight_layout()
 fig.savefig("figures/prior_power_distribution.png")
 plt.show()
 
-fig, ax = plt.subplots()
-ax.hist(wind_sample, normed=1, bins=100)
-ax.set_xlim(0,60)
-ax.set_ylabel("Probability Density")
-ax.set_xlabel("Wind Speed")
-
-plt.show()
-
 #check that data and distributions look similar
-sample_actual = np.random.choice(andmyran_prior.wind_data_long.value, size=1000)
-sample_simulated = [np.mean(andmyran_prior.sample_from_prior(years=1/12)) for i in range(1000)]
+wind_data = pd.melt(andmyran_prior.wind_data).value
+sample_actual = np.random.choice(wind_data, size=1000)
+sample_simulated = [np.mean(i) for i in monthly_wind_samples]
 
 fix, ax = plt.subplots()
-ax.hist(sample_actual)
+ax.hist(sample_actual, alpha=.7)
+ax.hist(sample_simulated, alpha=.7, bins=20)
 plt.show()
 
-#convert prior_winds to power output
-#Data from Vestas power curve chart V90 - 3.0MW - approximately
-wind_speed=np.array([4,5,6,7,8,9,10, 11, 12, 13, 14, 15])
-power_kw_v90=np.array([85, 200, 350, 590, 900, 1300, 1720, 2150, 2560, 2840, 2980, 3000])
-
-#Create instance of a wind turbine
-v90_turbine = wind_turbine(curve_speeds=wind_speed, power_points = power_kw_v90)
-
-wind=np.linspace(0,30,200)
-output = v90_turbine(wind)
-
-power_sample=v90_turbine(wind_sample)
-
-fig, (ax1, ax2) = plt.subplots(2)
-ax1.plot(wind, output, "-")
-ax1.set_xlabel("Wind Speed, m/s")
-ax1.set_ylabel("Power Output, kW")
-ax2.hist(power_sample, bins=50, normed=1)
-ax2.set_xlabel("Power Output")
-ax2.set_ylabel("Density")
-fig.set_size_inches(8,8)
-fig.savefig("figures/power_output.png")
-plt.show()
-
-power_output = np.sum(v90_turbine(wind_sample))
-
-yearly_power_output = []
-for i in range(500):
-	wind_sample=andmyran_prior.sample_from_prior()
-	power = v90_turbine(wind_sample)
-	yearly_power_output.append(np.sum(power))
-
-plt.hist(np.array(yearly_power_output)*.02, bins=30, normed=1)
-plt.show()
 
 
 #Various scenarios
@@ -161,19 +133,29 @@ def loss_wait(kwh, I, c_oper, p_kwh, d, M):
 		stage2_loss =  loss_pass(kwh, I, c_oper,p_kwh, d)
 	return(stage2_loss + M)
 
-#fixed parameters
-I = 100000 # fixed investment cost
-c_oper = .005 #operating cost of turbine
-M = 0 #fixed cost of measurement/value of waiting
-p_kwh = .03 #price per kwh
-d = .90 #discount factor for opportunity cost
 
-kwh_dist = yearly_power_output # distribution of yearly power output
+#generate yearly power output data
+yearly_wind_samples, params = andmyran_prior.sample_from_prior(1000, 8760)
 
+yearly_power=[]
+for w in yearly_wind_samples:
+	yearly_power.append(v90_turbine(w))
+
+tot_power=[]
+for p in yearly_power:
+	tot_power.append(np.array(p).sum())
 
 dist_loss_invest = []
 dist_loss_pass = []
 dist_loss_wait = []
+kwh_dist = tot_power # distribution of yearly power output
+
+#fixed parameters
+I = 80000 # fixed investment cost
+c_oper = .005 #operating cost of turbine
+M = 0 #fixed cost of measurement/value of waiting
+p_kwh = .03 #price per kwh
+d = .90 #discount factor for opportunity cost
 
 for kwh in kwh_dist:
 	dist_loss_invest.append(loss_invest(kwh, I, c_oper, p_kwh))
@@ -201,15 +183,16 @@ print(exp_loss_invest, exp_loss_pass, exp_loss_wait)
 value_of_waiting = exp_loss_pass-exp_loss_wait
 print("value of waiting", value_of_waiting)
 
-lmbd_hat = andmyran_prior.lmbd_hat
-k_hat =andmyran_prior.k_hat
-
 
 wind_invest_code = """
 data {
 	int<lower=0> N; //number of observations
-	real alpha_hat; //prior mean of alpha
-	real sigma_hat; //prior mean of sigma
+	real shape_alpha; //prior shape paramter of alpha
+	real scale_alpha; //prior shape of paramter of scale
+	real location_alpha; //shifts prior parameter
+	real shape_sigma; //
+	real scale_sigma; //
+	real location_sigma; //
 	vector[N] w; //wind speed observations
 
 }
@@ -218,16 +201,20 @@ parameters {
 	real<lower=0> sigma; 
 }
 model {
-	alpha ~ normal(alpha_hat,1); //prior on alpha
-	sigma ~ normal(sigma_hat, 1); //prior on sigma
+	alpha - location_alpha ~ gamma(shape_alpha,scale_alpha); //prior on alpha
+	sigma - location_sigma ~ gamma(shape_sigma, scale_sigma); //prior on sigma
 	w ~ weibull(alpha, sigma); //likelihood
 }
 """
 
 
 #Step one - prior distribution from wind speed data from metreological office
-alpha_hat =andmyran_prior.k_hat #alpha
-sigma_hat = andmyran_prior.lmbd_hat #lambda
+shape_alpha =andmyran_prior.shape_alpha 
+scale_alpha = andmyran_prior.scale_alpha
+location_alpha = andmyran_prior.location_alpha 
+shape_sigma = andmyran_prior.shape_sigma
+scale_sigma = andmyran_prior.scale_sigma
+location_sigma = andmyran_prior.location_sigma
 
 #Step two - 
 #open data, An
@@ -236,10 +223,14 @@ w=trial_data.Andmyran_a1.tolist()
 N=len(trial_data)
 
 
-wind_invest_data = {'N': N ,
+wind_invest_data = {'N': N,
 	'w': w,
-	'alpha_hat':alpha_hat,
-	'sigma_hat':sigma_hat
+	'shape_alpha':shape_alpha,
+	'scale_alpha':scale_alpha,
+	'location_alpha':location_alpha,
+	'shape_sigma':shape_sigma,
+	'scale_sigma':scale_sigma,
+	'location_sigma':location_sigma
 }
 
 wind_invest_model = pystan.StanModel(model_code=wind_invest_code)
