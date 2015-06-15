@@ -5,11 +5,6 @@
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[ves()]{vestas_v90}
-Vesta {V}90 3.0 {MW} {Brochure}.
-\newblock URL
-  \url{http://nozebra.ipapercms.dk/Vestas/Communication/Productbrochure/V9030MW/V9030MWUK/}.
-
 \bibitem[{Stan Development
   Team}(2014{\natexlab{a}})]{stan_development_team_pystan:_2014}
 {Stan Development Team}.
@@ -24,6 +19,10 @@ Vesta {V}90 3.0 {MW} {Brochure}.
   {Version} 2.5.0}.
 \newblock 2014{\natexlab{b}}.
 \newblock URL \url{http://mc-stan.org/}.
+
+\bibitem[{Vestas}(2015)]{vestas_v90}
+{Vestas}.
+\newblock Vesta {V}90 3.0 {MW} {Brochure}, 2015.
 
 \bibitem[Weibull(1951)]{weibull_statistical_1951}
 Waloddi Weibull.

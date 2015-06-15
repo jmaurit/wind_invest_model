@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.10.11)  4 JUN 2015 13:13
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.10.11)  15 JUN 2015 16:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -358,47 +358,48 @@ File: figures/avg_wind_speed_data.png Graphic file (type png)
 Package pdftex.def Info: figures/avg_wind_speed_data.png used on input line 72.
 
 (pdftex.def)             Requested size: 469.75502pt x 281.85628pt.
-[2] <figures/prior_distribution.png, id=28, 722.7pt x 433.62pt>
-File: figures/prior_distribution.png Graphic file (type png)
-<use figures/prior_distribution.png>
-Package pdftex.def Info: figures/prior_distribution.png used on input line 92.
-(pdftex.def)             Requested size: 469.75502pt x 281.85628pt.
-<figures/power_output.png, id=29, 578.16pt x 578.16pt>
-File: figures/power_output.png Graphic file (type png)
-<use figures/power_output.png>
-Package pdftex.def Info: figures/power_output.png used on input line 101.
-(pdftex.def)             Requested size: 375.80544pt x 375.79955pt.
-[3 <./figures/avg_wind_speed_data.png>] [4 <./figures/prior_distribution.png>] 
-[5 <./figures/power_output.png>] <figures/losses.png, id=43, 433.62pt x 722.7pt
->
+[2] <figures/priors.png, id=28, 433.62pt x 578.16pt>
+File: figures/priors.png Graphic file (type png)
+<use figures/priors.png>
+Package pdftex.def Info: figures/priors.png used on input line 98.
+(pdftex.def)             Requested size: 328.82707pt x 438.45338pt.
+[3 <./figures/avg_wind_speed_data.png>] [4 <./figures/priors.png>] <figures/pri
+or_power_distribution.png, id=38, 722.7pt x 578.16pt>
+File: figures/prior_power_distribution.png Graphic file (type png)
+<use figures/prior_power_distribution.png>
+Package pdftex.def Info: figures/prior_power_distribution.png used on input lin
+e 121.
+(pdftex.def)             Requested size: 375.80544pt x 300.64493pt.
+[5] [6 <./figures/prior_power_distribution.png>] <figures/losses.png, id=47, 43
+3.62pt x 722.7pt>
 File: figures/losses.png Graphic file (type png)
 <use figures/losses.png>
-Package pdftex.def Info: figures/losses.png used on input line 124.
+Package pdftex.def Info: figures/losses.png used on input line 142.
 (pdftex.def)             Requested size: 375.80544pt x 626.373pt.
 
-LaTeX Warning: Float too large for page by 1.67216pt on input line 127.
+LaTeX Warning: Float too large for page by 1.67216pt on input line 145.
 
-[6] [7 <./figures/losses.png>] <figures/posteriors.png, id=53, 433.62pt x 722.7
+[7] [8 <./figures/losses.png>] <figures/posteriors.png, id=56, 433.62pt x 722.7
 pt>
 File: figures/posteriors.png Graphic file (type png)
 <use figures/posteriors.png>
-Package pdftex.def Info: figures/posteriors.png used on input line 167.
+Package pdftex.def Info: figures/posteriors.png used on input line 185.
 (pdftex.def)             Requested size: 281.85587pt x 469.78252pt.
-[8] <figures/post_losses.png, id=57, 433.62pt x 433.62pt>
+<figures/post_losses.png, id=57, 433.62pt x 433.62pt>
 File: figures/post_losses.png Graphic file (type png)
 <use figures/post_losses.png>
-Package pdftex.def Info: figures/post_losses.png used on input line 178.
+Package pdftex.def Info: figures/post_losses.png used on input line 196.
 (pdftex.def)             Requested size: 375.80544pt x 375.8238pt.
-(Output/wind_investment.bbl [9] [10 <./figures/posteriors.png>] [11 <./figures/
-post_losses.png>]) [12] (Output/wind_investment.aux) ) 
+[9] [10 <./figures/posteriors.png>] [11 <./figures/post_losses.png>] (Output/wi
+nd_investment.bbl) [12] (Output/wind_investment.aux) ) 
 Here is how much of TeX's memory you used:
  4151 strings out of 493315
- 60182 string characters out of 6137903
- 129339 words of memory out of 5000000
+ 60168 string characters out of 6137903
+ 129346 words of memory out of 5000000
  7524 multiletter control sequences out of 15000+600000
  10467 words of font info for 39 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,9n,32p,698b,302s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,10n,32p,701b,300s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2013/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2013/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2013/te
@@ -420,7 +421,7 @@ blic/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmti10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmtt10.pfb>
-Output written on Output/wind_investment.pdf (12 pages, 443037 bytes).
+Output written on Output/wind_investment.pdf (12 pages, 476143 bytes).
 PDF statistics:
  136 PDF objects out of 1000 (max. 8388607)
  89 compressed objects within 1 object stream

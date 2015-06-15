@@ -67,7 +67,7 @@ andmyran_prior = wind_prior_generation(avg_wind_speed_data)
 #andmyran_prior.sample_from_prior()
 
 #wind, prior = andmyran_prior.create_wind_prior()
-wind_sample, params_hat = andmyran_prior.sample_from_prior(1, 720)
+wind_sample, params_hat = andmyran_prior.sample_from_prior(1, 8640)
 monthly_wind_samples, params_hats = andmyran_prior.sample_from_prior(1000, 720)
 
 #now generate power curve for turbine
@@ -86,18 +86,21 @@ avg_power=[]
 for i in month_power:
 	avg_power.append(np.array(i).sum())
 
+wind = np.linspace(0,30,200)
+output = v90_turbine(wind)
+
 params_hat = np.array(params_hat).round(2)
 fig, (ax1, ax2, ax3) = plt.subplots(3)
 ax1.hist(wind_sample, bins=50, normed=1)
-ax1.set_xlabel(r'1 month of simulated hourly wind speeds (m/s), weibull distribution, $\alpha = {alpha_hat}$, $\sigma = {sigma_hat}$'.format(alpha_hat= params_hat[0][0], 
+ax1.set_xlabel(r'1 year of simulated hourly wind speeds (m/s), weibull distribution, $\alpha = {alpha_hat}$, $\sigma = {sigma_hat}$'.format(alpha_hat= params_hat[0][0], 
 	sigma_hat=params_hat[0][1]))
 ax1.set_xlim(0,50)
 ax1.set_ylabel("Density")
 ax2.plot(wind, output, "-")
-ax2.set_xlabel("Wind Speed, m/s")
+ax2.set_xlabel("Wind Speed, m/s")	
 ax2.set_ylabel("Power Output, kW")
 ax3.hist(avg_power, bins=30, normed=1)
-ax3.set_xlabel("Simulated distribution of monthly power (kWh) produced")	
+ax3.set_xlabel("Simulated distribution of yearly power (kWh) produced")	
 ax3.set_ylabel("Density")
 fig.set_size_inches(10,8)
 fig.tight_layout()

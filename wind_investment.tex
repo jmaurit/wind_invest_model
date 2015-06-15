@@ -74,38 +74,56 @@ Figure \ref{avg_wind_speed_data} shows a chart of the average monthly wind speed
 	\label{avg_wind_speed_data}
 \end{figure}
 
-Wind speeds measured at shorter intervals are known to roughly follow a weibull distribution \citep{weibull_statistical_1951}. \footnote{A weibull distribution is defined as having a probability distribution function of $f(x, \sigma, \alpha) = \frac{\alpha}{\sigma} \big(\frac{x}{\sigma}\big)^{\alpha-1} e^{-\big(\frac{x}{\sigma}\big)^k}$} Thus we use the formula for the mean of a weibull distribution, as shown in equation \ref{mean_weibull}. Here $Gamma$ represents the Gamma function.
+Wind speeds measured at shorter intervals are known to roughly follow a weibull distribution \citep{weibull_statistical_1951}. \footnote{A weibull distribution is defined as having a probability distribution function of $f(x, \sigma, \alpha) = \frac{\alpha}{\sigma} \big(\frac{x}{\sigma}\big)^{\alpha-1} e^{-\big(\frac{x}{\sigma}\big)^k}$}.
 
 \begin{equation}
 \mu_{weibull} = \sigma*Gamma(1+\frac{1}{\alpha})
 \label{mean_weibull}
 \end{equation}
 
+
+In turn the Weibull parameter values of $\alpha$ and $\sigma$ are
+modeled as Gamma distributions as this provides a positive support and flexible shape. 
+
+To obtain semi-informative priors on the $\alpha$ and $\sigma$ variables, vectors $\hat{\alpha_i}$ and $\hat{\sigma_i}$ are estimated from the monthly average wind speed data shown above for locations $i$. We use the formula for the mean of a weibull distribution, as shown in equation \ref{mean_weibull}, where $Gamma$ represents the Gamma function. We then minimize squared errors as in equation \ref{least_squares} to obtain the vectors of estimated parameters. 
+
 \begin{equation}
-min_{\alpha,\sigma} \sum_{i=1}^n (\mu_i - \sigma*Gamma(1+1/\alpha))^2
+min_{\alpha,\sigma} \sum_{t=1}^n (\mu_t - \sigma*Gamma(1+1/\alpha))^2
 \label{least_squares}
 \end{equation}
 
-Weibul parameter values of $\alpha$ and $\sigma$ are then chosen by minimizing equation \ref{least_squares}. From this optimisation, estimates of the shape parameter $\hat{\alpha} = .6$ and the scale parameter $\hat{\sigma} = 3.2$ are found.  This corresponds to a weibull distribution with the probability distribution as shown in figure \ref{weibull_distribution}. A histogram of one year of hourly measurements (8760) are plotted along with the probability distribution. 
+Figure \ref{priors} show the prior gamma distributions on the $\alpha$ and $\sigma$ weibull parameters that best fit the estimated vectors $\hat{\alpha_i}$ and $\hat{\sigma_i}$. The gamma distribution for the $\alpha$ parameter has a shape parameter of $\lambda_{\alpha} = 3.9$ and a scale parameter $\zeta_{\alpha} = .252$. The prior gamma distribution on the $\sigma$ parameter is estimated to have a shape parameter of $\lambda_{\sigma} = 34.5$ and a scale parameter of $\zeta_{\sigma}=.085$.
 
 \begin{figure}
-	\includegraphics[width=1\textwidth]{figures/prior_distribution.png}
-	\caption{Weibull probability distribution of the prior predictive distribution of wind speeds for Andmyran. The histogram represents 8640 random draws from the distribution, consisting of one year of hourly measurements.}
-	\label{weibull_distribution}
+	\includegraphics[width=.7\textwidth]{figures/priors.png}
+	\caption{Gamma prior probability distributions on the weibull shape and scale parameters $\alpha$ and $\sigma$.}
+	\label{priors}
 \end{figure}
 
-To transform the simulated wind speed data from the weibull distribution to power output, I use the power curve of a common commercial wind turbine: the Vestas V90 turbine \citep{vestas_v90}. The power curve can be seen in the top panel of figure \ref{power_output}. At wind speeds up to 4 meters per second (m/s), no power is produced. Between speeds of 4 and 15 m/s, power output rapidly increases with respect to wind speed. The rated power output is reached at wind speeds of between 15 and 25 m/s, after which power is cut-out in order to protect the turbine. 
+The top panel of figure \ref{power_output} shows the distribution of 1-year of hourly wind speeds drawn from a weibull distribution with fixed $\alpha$ and $\sigma$ parameters.
+
+To transform the simulated wind speed data from the weibull distribution to power output, we use the power curve of a common commercial wind turbine: the Vestas V90 turbine \citep{vestas_v90}. The power curve can be seen in the middle panel of figure \ref{power_output}. At wind speeds up to 4 meters per second (m/s), no power is produced. Between speeds of 4 and 15 m/s, power output rapidly increases with respect to wind speed. The rated power output is reached at wind speeds of between 15 and 25 m/s, after which power is cut-out in order to protect the turbine. 
+
+Obtaining a prior predictive distribution of yearly power output is accomplished with the following algorithm:
+
+\begin{enumerate}
+\item Draw weibull parameters $\hat{\alpha}$ and $\hat{\sigma}$ from the appropriate gamma distributions. 
+\item Draw 1-year of (8640 hourly) wind speeds from a $weibull(\hat{\alpha},\hat{\sigma})$ distribution.
+\item Convert the hourly wind speed draws to power output via the power curve
+\item Sum to get a yearly total
+\item Repeat
+\end{enumerate}  
+
+The lower panel of figure \ref{power_output} shows the distribution of yearly power outputs.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=.8\textwidth]{figures/power_output.png}
-	\caption{Weibull probability distribution of the prior predictive distribution of wind speeds for Andmyran. The histogram represents 8640 random draws from the distribution, consisting of one year of hourly measurements.}
+	\includegraphics[width=.8\textwidth]{figures/prior_power_distribution.png}
+	\caption{The top panel shows a histogram of 1-year of simulated wind speeds from a Weibull probability distribution. The middle panel shows the power curve of the V90 3 mW Vesta wind turbine. The bottom panel shows the prior predictive distribution of yearly power output from the wind turbine.}
 	\label{power_output}
 \end{figure}
 
-The lower panel of figure \ref{power_output} shows the histogram of power outputs. We can notice the high number of hours with zero production.
-
-The loss functions are defined as in equation \ref{loss_functions}:
+ After having generated a prior predictive distribution of yearly power outputs. We define the following loss functions as in equation \ref{loss_functions}:
 
 \begin{align}
 L_{invest} = I - (p_{kwh} - c_{kwh})*kwh\\
@@ -115,9 +133,9 @@ L_{wait-pass} = M + I - d(p_{kwh} - c_{kwh})*kwh
 \label{loss_functions}
 \end{align}
 
-These functions describe the losses associated with investing or passing in the first period as well as waiting and then deciding. $I$ represents the lump-sum investment cost, $p_{kwh}$ is the price per kilowatt-hour (kWh) for the electricity produced. $c_{kwh}$ represents any running costs. $d$ represents a discount rate on the opportunity cost of not investing - the intuition here is that the capital could be put in place in some other investment that gains a return. $M$ represents the cost associated with waiting and gathering data. This could include the cost of installing and monitoring a wind-measuring station.
+These functions describe the losses associated with investing or passing in the first period as well as well as the decision to wait. $I$ represents the lump-sum investment cost, $p_{kwh}$ is the price per kilowatt-hour (kWh) for the electricity produced. $c_{kwh}$ represents any running costs. $d$ represents a discount rate on the opportunity cost of not investing - the intuition here is that the capital could be put in place in some other investment that gains a return. $M$ represents the cost associated with waiting and gathering data. This could include the cost of installing and monitoring a wind-measuring station.
 
-Given the loss functions for the different choices with parameters: $I=100,000$, $c_{oper}=0.005$, $p_{kwh}$, $d=.90$, $M=0$ we then draw 500 sample years of hourly wind data. At the first stage the investor can either choose to invest, to pass, or to wait and gather more information. The distribution of the losses for each sampled year for these three choices are shown in figure \ref{losses}.
+Given the loss functions for the different choices with parameters: $I=80,000$, $c_{oper}=0.005$, $p_{kwh}$, $d=.90$, $M=0$ we then draw 500 sample years of hourly wind data. At the first stage the investor can either choose to invest, to pass, or to wait and gather more information. The distribution of the losses for each sampled year for these three choices are shown in figure \ref{losses}.
 
 \begin{figure}
 	\centering
@@ -128,14 +146,14 @@ Given the loss functions for the different choices with parameters: $I=100,000$,
 
 With the chosen parameters there is a high degree of prior uncertainty about whether a project will be profitable or not. Thus there is a high degree of value in waiting. The strong assumption in calculating the expected loss of waiting is that the investor will know with certainty whether investing is profitable or not after having gathered more information. This is why the expected loss of waiting in this simulation is always less than zero. This assumption can easily be relaxed.
 
-Taking the expected value from these samples, we get the values shown in table \ref{table:expected_losses}. Clearly, the value of waiting in this example are quite high. One way of interpreting the result would be to say that it would be worthwhile to wait and gather more information if the cost of gathering the information, $M$ were less than 1539 (1609-70.4.) Otherwise, you would pass on making the investment. 
+Taking the expected value from these samples, we get the values shown in table \ref{table:expected_losses}. Clearly, the value of waiting in this example are quite high. One way of interpreting the result would be to say that it would be worthwhile to wait and gather more information if the cost of gathering the information, $M$ were less than 6875 (8129-1254) Otherwise, you would pass on making the investment. 
 
 \begin{table}
 \begin{center}
 \begin{tabular}{l c}
-$E(loss_{invest})$ & 78.3 \\
-$E(loss_{pass})$ & -70.4 \\
-$E(loss_{wait})$ & -1609.4 \\
+$E(loss_{invest})$ & 1394 \\
+$E(loss_{pass})$ & -1254 \\
+$E(loss_{wait})$ & -8129 \\
 
 \end{tabular}
 \caption{Expected losses from decision to invest, pass or wait at first stage}
@@ -149,8 +167,8 @@ The simple model can be expressed as in equation \ref{bayes_model}. The first te
 
 \begin{align}
 p(wind-data|\theta) &\sim weibull(\alpha, \sigma)\\
-alpha &\sim normal(\hat{\alpha}, 1)\\
-sigma &\sim normal(\hat{\sigma}, 1)
+\alpha &\sim gamma(\hat{\lambda_{\alpha}}, \hat{\zeta_{\alpha}})\\
+\sigma &\sim gamma(\hat{\lambda_{\sigma}}, \hat{\zeta_{\sigma}})
 \label{bayes_model}
 \end{align}
 
